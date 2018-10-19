@@ -1,0 +1,29 @@
+type User {
+  id: ID! @unique
+  name: String! @unique
+  email: String! @unique
+}
+
+type Ponto {
+  id: ID! @unique
+  data: DateTime! @unique
+  ent1: Float
+  sai1: Float
+  ent2: Float
+  sai2: Float
+  obs: String
+}
+
+type Apontamentos {
+  id: ID! @unique
+  data: DateTime!
+  hini: String! 
+  hfim: String!
+  hdesconto: String
+  htranslado: String
+  htotstr: String
+  htot: Float
+  cliente: String
+  chamado: String
+  obs: String
+}

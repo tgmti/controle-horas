@@ -8,6 +8,12 @@
         <ul>
           <li>Lista de apontamenntos</li>
           <li><a href="https://vuetifyjs.com/pt-BR/components/data-tables#examples">data-tables</a></li>
+          <li>Separar componente</li>
+          <li>Adicionar ao dar enter</li>
+          <li>Conectar com o <a href="https://app.prisma.io/pfinance/services/prisma-us1/pfinance/dev/databrowser/User">prisma</a></li>
+          <li>Calcular total de horas</li>
+          <li>Converter para hora decimal</li>
+          <li>Criar DashBoard com os totais</li>
         </ul>
 
         <v-data-table
