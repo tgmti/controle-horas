@@ -1,95 +1,84 @@
 <template>
-  <v-app>
-    <v-navigation-drawer
-      persistent
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      enable-resize-watcher
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-tile
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
+  <v-app dark >
+      <AppHeader></AppHeader>
+
+      <v-content>
+        <ApontaHora></ApontaHora>
+
+        <ul>
+          <li>Lista de apontamenntos</li>
+          <li><a href="https://vuetifyjs.com/pt-BR/components/data-tables#examples">data-tables</a></li>
+        </ul>
+
+        <v-data-table
+          :headers="headers"
+          :items="desserts"
+          hide-actions
+          class="elevation-1"
         >
-          <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar
-      app
-      :clipped-left="clipped"
-    >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>menu</v-icon>
-      </v-btn>
-    </v-toolbar>
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-tile @click="right = !right">
-          <v-list-tile-action>
-            <v-icon>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2017</span>
-    </v-footer>
+          <template slot="items" slot-scope="props">
+            <td>{{ props.item.name }}</td>
+            <td class="text-xs-right">{{ props.item.calories }}</td>
+            <td class="text-xs-right">{{ props.item.fat }}</td>
+            <td class="text-xs-right">{{ props.item.carbs }}</td>
+            <td class="text-xs-right">{{ props.item.protein }}</td>
+            <td class="text-xs-right">{{ props.item.iron }}</td>
+          </template>
+          <template slot="no-data">
+            <v-alert :value="true" color="error" icon="warning">
+              Sorry, nothing to display here :(
+            </v-alert>
+          </template>
+        </v-data-table>
+
+      </v-content>
+
+      <AppFooter></AppFooter>
+
   </v-app>
 </template>
 
 <script>
+import AppHeader from './components/template/AppHeader'
+import AppFooter from './components/template/AppFooter'
+import ApontaHora from './components/ponto/ApontaHora'
 import HelloWorld from './components/HelloWorld'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    AppHeader,
+    AppFooter,
+    ApontaHora
   },
   data () {
     return {
-      clipped: false,
-      drawer: true,
-      fixed: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
-      }],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+
+       headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            sortable: false,
+            value: 'name'
+          },
+          { text: 'Calories', value: 'calories' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' }
+        ],
+        desserts: [ 
+          {calories: 10, fat: 10, carbs: 10, protein: 10, iron : 20},
+          {calories: 105, fat: 10, carbs: 10, protein: 10, iron : 20},
+          {calories: 140, fat: 10, carbs: 10, protein: 10, iron : 20},
+          {calories: 10, fat: 10, carbs: 10, protein: 10, iron : 20},
+          {calories: 703, fat: 10, carbs: 10, protein: 10, iron : 20},
+          {calories: 50, fat: 10, carbs: 10, protein: 10, iron : 20},
+          {calories: 10, fat: 10, carbs: 10, protein: 10, iron : 20},
+          {calories: 20, fat: 10, carbs: 10, protein: 10, iron : 20}
+        ]
+
     }
   }
 }

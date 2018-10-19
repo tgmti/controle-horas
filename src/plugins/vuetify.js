@@ -23,7 +23,7 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
-    transitions
+    transitions,
   },
   customProperties: true,
   iconfont: 'md',
