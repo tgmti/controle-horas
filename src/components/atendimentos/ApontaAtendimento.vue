@@ -1,6 +1,6 @@
 <template>
 
-  <v-form>
+  <v-form persistent>
     <v-container>
       <v-layout row wrap>
 
@@ -72,9 +72,7 @@
 <script>
 
 export default {
-
-
-    name: "ApontaHora",
+    name: "ApontaAtendimento",
     data () {
       return {
         datapont: ( (new Date()).toISOString().slice(0,10) ),
