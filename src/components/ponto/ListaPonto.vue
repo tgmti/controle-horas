@@ -1,26 +1,38 @@
 <template>
 
-    <v-data-table
-        :headers="headers"
-        :items="desserts"
-        hide-actions
-        class="elevation-1"
-    >
-        <template slot="items" slot-scope="props">
-            <td>{{ props.item.datapont }}</td>
-            <td>{{ props.item.ent1 }}</td>
-            <td>{{ props.item.sai1 }}</td>
-            <td>{{ props.item.ent2 }}</td>
-            <td>{{ props.item.sai2 }}</td>
-            <td>{{ props.item.obs }}</td>
-        </template>
+    <v-card>
+        <v-card-title>
+        Registro Ponto
+        <v-spacer></v-spacer>
+        <v-text-field
+            v-model="search"
+            append-icon="search"
+            label="Search"
+            single-line
+            hide-details
+        ></v-text-field>
+        </v-card-title>
+        <v-data-table
+            :headers="headers"
+            :items="desserts"
+            :search="search"
+        >
+            <template slot="items" slot-scope="props">
+                <td>{{ props.item.datapont }}</td>
+                <td>{{ props.item.ent1 }}</td>
+                <td>{{ props.item.sai1 }}</td>
+                <td>{{ props.item.ent2 }}</td>
+                <td>{{ props.item.sai2 }}</td>
+                <td>{{ props.item.obs }}</td>
+            </template>
 
-        <template slot="no-data">
-            <v-alert :value="true" color="error" icon="warning">
-                Sorry, nothing to display here :(
-            </v-alert>
-        </template>
-    </v-data-table> 
+            <template slot="no-data">
+                <v-alert :value="true" color="error" icon="warning">
+                    Sorry, nothing to display here :(
+                </v-alert>
+            </template>
+        </v-data-table> 
+    </v-card>
 
 </template>
 
@@ -32,6 +44,7 @@ export default {
     name: "ListaPonto",
     data () {
       return {
+        search: null,
         headers: [
             {
                 text: 'Data',

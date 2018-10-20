@@ -3,9 +3,7 @@
       <AppHeader></AppHeader>
 
       <v-content>
-        <RegistraPonto></RegistraPonto>
-
-        <ListaPonto></ListaPonto>
+        <Ponto></Ponto>
 
         <h2>TODO:</h2>
         <ul>
@@ -29,18 +27,14 @@
 <script>
 import AppHeader from './components/template/AppHeader'
 import AppFooter from './components/template/AppFooter'
-//import ListaPonto from './components/ponto/ListaPonto'
-import RegistraPonto from './components/ponto/RegistraPonto'
-import ListaPonto from './components/ponto/ListaPonto'
+import Ponto from './components/ponto/Ponto'
 
 export default {
   name: 'App',
   components: {
     AppHeader,
     AppFooter,
-    RegistraPonto,
-    ListaPonto
-    
+    Ponto
   },
   data () {
     return {}
