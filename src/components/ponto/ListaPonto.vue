@@ -14,11 +14,12 @@
         </v-card-title>
         <v-data-table
             :headers="headers"
-            :items="desserts"
+            :items="registros"
             :search="search"
+            item-key="id"
         >
             <template slot="items" slot-scope="props">
-                <td>{{ props.item.datapont }}</td>
+                <td>{{ props.item.data }}</td>
                 <td>{{ props.item.ent1 }}</td>
                 <td>{{ props.item.sai1 }}</td>
                 <td>{{ props.item.ent2 }}</td>
@@ -32,11 +33,22 @@
                 </v-alert>
             </template>
         </v-data-table> 
+
+
+        <ul>
+            <li v-for="item of items" :key="item['.key']">
+                {{ item.data }}
+            </li>     
+        </ul>
+        {{items}}
+
     </v-card>
 
 </template>
 
 <script>
+
+import {db} from '../../config/db'
 
 export default {
 
@@ -50,7 +62,7 @@ export default {
                 text: 'Data',
                 align: 'left',
                 sortable: true,
-                value: 'datapont'
+                value: 'data'
             },
             { text: 'Entrada',    value: 'ent1' },
             { text: 'Almoço',     value: 'sai1' },
@@ -59,18 +71,24 @@ export default {
             { text: 'Observação', value: 'obs'  }
 
         ],
-        desserts: [ 
-            {datapont: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste1"},
-            {datapont: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste2"},
-            {datapont: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste3"},
-            {datapont: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste4"},
-            {datapont: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste5"},
-            {datapont: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste6"},
-            {datapont: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste7"},
-            {datapont: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste8"}
+        registros: [  
+            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste1"},
+            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste2"},
+            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste3"},
+            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste4"},
+            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste5"},
+            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste6"},
+            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste7"},
+            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste8"} 
+        ],
+        items: [
+            {data: '01/12/2018', key: '123'}
         ]
       }
-    }    
+    },
+    firebase: {
+        items: db.ref('ponto')
+    }
 }
 </script>
 

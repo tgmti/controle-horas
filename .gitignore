@@ -19,3 +19,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# Configurações do Firebase
+src/config/firebase.js
+src/config/db.js
