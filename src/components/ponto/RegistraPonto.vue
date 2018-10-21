@@ -10,7 +10,7 @@
                 :close-on-content-click="false"
                 v-model="menu"
                 :nudge-right="40"
-                :return-value.sync="datapont"
+                :return-value.sync="ponto.datapont"
                 lazy
                 transition="scale-transition"
                 offset-y
@@ -19,12 +19,12 @@
             >
                 <v-text-field
                 slot="activator"
-                v-model="datapont"
+                v-model="ponto.datapont"
                 label="Data"
                 prepend-icon="event"
                 type="date"
                 ></v-text-field>
-                <v-date-picker v-model="datapont" @input="$refs.menu.save(datapont)"></v-date-picker>
+                <v-date-picker v-model="ponto.datapont" @input="$refs.menu.save(ponto.datapont)"></v-date-picker>
 
             </v-menu>
         </v-flex>
@@ -32,15 +32,16 @@
         <v-flex xs6 sm2>
             <v-text-field
                 label="Entrada"
-                v-model="ent1"
+                v-model="ponto.ent1"
                 type="time"
+                @keypress.enter="console.log(ponto)"
             ></v-text-field>
         </v-flex>
 
         <v-flex xs6 sm2>
             <v-text-field
                 label="Almoço"
-                v-model="ent2"
+                v-model="ponto.ent2"
                 type="time"
             ></v-text-field>
         </v-flex>
@@ -48,7 +49,7 @@
         <v-flex xs6 sm2>
             <v-text-field
                 label="Retorno"
-                v-model="sai1"
+                v-model="ponto.sai1"
                 type="time"
             ></v-text-field>
         </v-flex>
@@ -56,7 +57,7 @@
         <v-flex xs6 sm2>
             <v-text-field
                 label="Saída"
-                v-model="sai2"
+                v-model="ponto.sai2"
                 type="time"
             ></v-text-field>
         </v-flex>
@@ -64,14 +65,14 @@
         <v-flex xs12 sm2>
             <v-text-field
                 label="Observação"
-                v-model="obs"
+                v-model="ponto.obs"
             ></v-text-field>
         </v-flex>
 
-
-
       </v-layout>
     </v-container>
+
+    {{ this.$store.state.ponto }}
   </v-form>
 
 </template>
@@ -84,16 +85,18 @@ export default {
         const ponto = this.$store.state.ponto
     
       return {
-        datapont: ponto.datapont,
-        ent1: ponto.ent1,
-        sai1: ponto.sai1,
-        ent2: ponto.ent2,
-        sai2: ponto.sai2,
-        obs: ponto.obs,
-
-        menu:false
+          ponto: {
+              datapont: ponto.datapont,
+              ent1: ponto.ent1,
+              sai1: ponto.sai1,
+              ent2: ponto.ent2,
+              sai2: ponto.sai2,
+              obs: ponto.obs,
+          },
+        menu:false,
+        newponto: null
       }
-    }    
+    }
 }
 </script>
 

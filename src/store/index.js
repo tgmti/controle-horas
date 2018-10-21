@@ -13,6 +13,16 @@ const store = new Vuex.Store({
             sai2: null,
             obs: null,
         }
+    },
+    mutations: {
+        savePonto (state, payload) {
+          state.ponto = payload
+        }
+    },
+    actions: {
+        savePonto (context, ponto) {
+            context.commit('savePonto', ponto)
+        }
     }
 })
 
