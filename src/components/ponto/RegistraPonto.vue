@@ -22,7 +22,7 @@
                 v-model="datapont"
                 label="Data"
                 prepend-icon="event"
-                readonly
+                type="date"
                 ></v-text-field>
                 <v-date-picker v-model="datapont" @input="$refs.menu.save(datapont)"></v-date-picker>
 
@@ -79,17 +79,17 @@
 <script>
 
 export default {
-
-
     name: "RegistraPonto",
     data () {
+        const ponto = this.$store.state.ponto
+    
       return {
-        datapont: ( (new Date()).toISOString().slice(0,10) ),
-        ent1: null,
-        sai1: null,
-        ent2: null,
-        sai2: null,
-        obs: null,
+        datapont: ponto.datapont,
+        ent1: ponto.ent1,
+        sai1: ponto.sai1,
+        ent2: ponto.ent2,
+        sai2: ponto.sai2,
+        obs: ponto.obs,
 
         menu:false
       }
