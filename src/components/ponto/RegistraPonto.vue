@@ -90,7 +90,7 @@
 <script>
 
 import { mapFields } from 'vuex-map-fields';
-import {db} from '../../config/db'
+import db, {COLLECTION_PONTO} from '../../config/db'
 
 export default {
     name: "RegistraPonto",
@@ -103,9 +103,9 @@ export default {
         commitReg () {
             const ponto = this.$store.state.ponto
             if (ponto.id)
-                db.collection('ponto').doc(ponto.id).update(ponto)
+                db.collection(COLLECTION_PONTO).doc(ponto.id).update(ponto)
             else
-                db.collection('ponto').add(ponto)
+                db.collection(COLLECTION_PONTO).add(ponto)
         }
     },
     computed: {

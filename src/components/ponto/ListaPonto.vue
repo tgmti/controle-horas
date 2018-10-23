@@ -57,7 +57,7 @@
 
 <script>
 
-import {db} from '../../config/db'
+import db, {COLLECTION_PONTO} from '../../config/db'
 
 export default {
 
@@ -85,18 +85,18 @@ export default {
     },
     firestore () {
         return {
-            registros: db.collection('ponto')//.orderBy('data','desc')
+            registros: db.collection(COLLECTION_PONTO)//.orderBy('data','desc')
         }
     },
     methods: {
         delRegistro (id) {
-            db.collection('ponto').doc(id).delete()
+            db.collection(COLLECTION_PONTO).doc(id).delete()
         },
         formatData: (data) => {
             return !data ? null : (new Date(data)).toISOString().slice(0,10).split('-').reverse().join("/")
         },
         loadRegistro (id) {
-            db.collection('ponto').doc(id).get().then( (ponto) =>
+            db.collection(COLLECTION_PONTO).doc(id).get().then( (ponto) =>
                 this.$store.dispatch('savePonto', { ponto: ponto.data() } )
             )
             //this.$store.commit('updateField', { path: 'ponto', value: ponto.data() } )
