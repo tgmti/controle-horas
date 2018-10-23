@@ -25,6 +25,7 @@
                 <td>{{ props.item.ent2 }}</td>
                 <td>{{ props.item.sai2 }}</td>
                 <td>{{ props.item.obs }}</td>
+                <td>{{ props.item.id }}</td>
             </template>
 
             <template slot="no-data">
@@ -32,15 +33,7 @@
                     Sorry, nothing to display here :(
                 </v-alert>
             </template>
-        </v-data-table> 
-
-
-        <ul>
-            <li v-for="item of items" :key="item['.key']">
-                {{ item.data }}
-            </li>     
-        </ul>
-        {{items}}
+        </v-data-table>
 
     </v-card>
 
@@ -68,26 +61,17 @@ export default {
             { text: 'Almoço',     value: 'sai1' },
             { text: 'Retorno',    value: 'ent2' },
             { text: 'Saída',      value: 'sai2' },
-            { text: 'Observação', value: 'obs'  }
+            { text: 'Observação', value: 'obs'  },
+            { text: 'id', value: 'id'  }
 
         ],
-        registros: [  
-            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste1"},
-            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste2"},
-            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste3"},
-            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste4"},
-            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste5"},
-            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste6"},
-            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste7"},
-            {data: '01/12/2018', ent1: '08:00', sai1: '12:00', ent2: '14:00', sai2 : '18:00', obs: "teste8"} 
-        ],
-        items: [
-            {data: '01/12/2018', key: '123'}
-        ]
+        registros: []
       }
     },
-    firebase: {
-        items: db.ref('ponto')
+    firestore () {
+        return {
+            registros: db.collection('ponto').orderBy('data','desc')
+        }
     }
 }
 </script>
