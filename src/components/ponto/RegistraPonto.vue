@@ -4,13 +4,13 @@
     <v-container>
       <v-layout row wrap>
 
-        <v-flex xs12 sm2>
+        <v-flex xs12 sm3>
             <v-menu
                 ref="menu"
                 :close-on-content-click="false"
                 v-model="menu"
                 :nudge-right="40"
-                :return-value.sync="ponto.data"
+                :return-value.sync="data"
                 lazy
                 transition="scale-transition"
                 offset-y
@@ -38,90 +38,112 @@
         <v-flex xs6 sm2>
             <v-text-field
                 label="Entrada"
-                v-model="ponto.ent1"
+                v-model="ent1"
                 type="time"
-                @keypress.enter="commitReg(ponto)"
+                @keypress.enter="commitReg()"
             ></v-text-field>
         </v-flex>
 
         <v-flex xs6 sm2>
             <v-text-field
                 label="Almoço"
-                v-model="ponto.ent2"
+                v-model="sai1"
                 type="time"
-                @keypress.enter="commitReg(ponto)"
+                @keypress.enter="commitReg()"
             ></v-text-field>
         </v-flex>
 
         <v-flex xs6 sm2>
             <v-text-field
                 label="Retorno"
-                v-model="ponto.sai1"
+                v-model="ent2"
                 type="time"
-                @keypress.enter="commitReg(ponto)"
+                @keypress.enter="commitReg()"
             ></v-text-field>
         </v-flex>
 
         <v-flex xs6 sm2>
             <v-text-field
                 label="Saída"
-                v-model="ponto.sai2"
+                v-model="sai2"
                 type="time"
-                @keypress.enter="commitReg(ponto)"
+                @keypress.enter="commitReg()"
             ></v-text-field>
         </v-flex>
 
         <v-flex xs12 sm2>
             <v-text-field
                 label="Observação"
-                v-model="ponto.obs"
-                @keypress.enter="commitReg(ponto)"
+                v-model="obs"
+                @keypress.enter="commitReg()"
             ></v-text-field>
+        </v-flex>
+        <v-flex xs12 sm2>
+            <v-icon
+                small
+                @click="commitReg()"
+                >
+                submit
+            </v-icon>
         </v-flex>
 
       </v-layout>
     </v-container>
     {{ponto}}
-    {{this.$store.state.ponto}}
   </v-form>
 
 </template>
 
 <script>
 
-import { mapFields } from 'vuex-map-fields';
-import db, {COLLECTION_PONTO} from '../../config/db'
+    import { mapFields } from 'vuex-map-fields';
+    import db, {COLLECTION_PONTO} from '../../config/db'
 
-export default {
-    name: "RegistraPonto",
-    data () {
-        return {
-            menu:false
+    export default {
+        name: "RegistraPonto",
+        data () {
+            return {
+                menu:false
+            }
+        },
+        methods: {
+            commitReg () {
+                if (this.$store.state.id)
+                    db.collection(COLLECTION_PONTO).doc(this.$store.state.id).update(this.ponto).then(
+                        this.$store.dispatch('resetPonto')
+                    )
+                else
+                    db.collection(COLLECTION_PONTO).add(this.ponto).then(
+                        this.$store.dispatch('resetPonto')
+                    )
+
+                
+            }
+        },
+        computed: {
+            ...mapFields([
+                'id',
+                'data',
+                'ent1',
+                'sai1',
+                'ent2',
+                'sai2',
+                'obs',
+                'formatData'
+            ]),
+            ponto () {
+                return {
+                    id : this.$store.state.id,
+                    data : this.$store.state.data,
+                    ent1 : this.$store.state.ent1,
+                    sai1 : this.$store.state.sai1,
+                    ent2 : this.$store.state.ent2,
+                    sai2 : this.$store.state.sai2,
+                    obs : this.$store.state.obs
+                }
+            }
         }
-    },
-    methods: {
-        commitReg () {
-            const ponto = this.$store.state.ponto
-            if (ponto.id)
-                db.collection(COLLECTION_PONTO).doc(ponto.id).update(ponto)
-            else
-                db.collection(COLLECTION_PONTO).add(ponto)
-        }
-    },
-    computed: {
-        ...mapFields([
-            'ponto',
-            'ponto.id',
-            'ponto.data',
-            'ponto.ent1',
-            'ponto.sai1',
-            'ponto.ent2',
-            'ponto.sai2',
-            'ponto.obs',
-            'formatData'
-        ])
     }
-}
 </script>
 
 <style>

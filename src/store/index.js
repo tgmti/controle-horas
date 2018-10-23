@@ -4,23 +4,32 @@ import { getField, updateField } from 'vuex-map-fields';
 
 Vue.use(Vuex)
 
+const initState = {
+    id: null,
+    data: (new Date()), //( (new Date()).toLocaleDateString().split('/').reverse().join('-') ),
+    ent1: null,
+    sai1: null,
+    ent2: null,
+    sai2: null,
+    obs: null,
+    formatData: (new Date()).toLocaleDateString().split('/').reverse().join('-')
+    
+}
+
 const store = new Vuex.Store({
     strict: true,
-    state : {
-        ponto : {
-            id: null,
-            data: (new Date()), //( (new Date()).toLocaleDateString().split('/').reverse().join('-') ),
-            ent1: null,
-            sai1: null,
-            ent2: null,
-            sai2: null,
-            obs: null,
-        },
-        formatData: (new Date()).toLocaleDateString().split('/').reverse().join('-')
-        
-    },
+    state : initState,
     mutations: {
         updateField,
+        savePonto (state, payload) {
+            state.id = payload.id
+            state.data = payload.data
+            state.ent1 = payload.ent1
+            state.sai1 = payload.sai1
+            state.ent2 = payload.ent2
+            state.sai2 = payload.sai2
+            state.obs = payload.obs
+        }
 
     },
     getters: {
@@ -28,8 +37,11 @@ const store = new Vuex.Store({
     },
     actions: {
         savePonto (context, payload) {
-            context.commit('updateField', { path: 'ponto', value: payload.ponto })
+            context.commit('savePonto', payload.ponto)
             context.commit('updateField', { path: 'formatData', value: (new Date(payload.ponto.data)).toISOString().slice(0,10) })
+        },
+        resetPonto (context) {
+            context.dispatch('savePonto', { ponto: initState } )
         }
     }
 })
