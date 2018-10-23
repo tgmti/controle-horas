@@ -26,6 +26,11 @@
                 <td>{{ props.item.sai2 }}</td>
                 <td>{{ props.item.obs }}</td>
                 <td>{{ props.item.id }}</td>
+                <td>
+                    <button @click="delRegistro(props.item.id)">
+                        Delete
+                    </button>     
+                </td>
             </template>
 
             <template slot="no-data">
@@ -71,6 +76,11 @@ export default {
     firestore () {
         return {
             registros: db.collection('ponto').orderBy('data','desc')
+        }
+    },
+    methods: {
+        delRegistro (id) {
+            db.collection('ponto').doc(id).delete()
         }
     }
 }
