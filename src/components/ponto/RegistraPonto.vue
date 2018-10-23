@@ -10,21 +10,27 @@
                 :close-on-content-click="false"
                 v-model="menu"
                 :nudge-right="40"
-                :return-value.sync="ponto.datapont"
+                :return-value.sync="ponto.data"
                 lazy
                 transition="scale-transition"
                 offset-y
                 full-width
                 min-width="290px"
             >
+                <v-date-picker 
+                    v-model="formatData" 
+                    :formatted-value.sync="formatData"
+                    @input="$refs.menu.save(formatData)">
+                </v-date-picker>
+
                 <v-text-field
-                slot="activator"
-                v-model="ponto.datapont"
-                label="Data"
-                prepend-icon="event"
-                type="date"
+                    slot="activator"
+                    v-model="formatData"
+                    @input="$refs.menu.save(formatData)"
+                    label="Data"
+                    prepend-icon="event"
+                    type="date"
                 ></v-text-field>
-                <v-date-picker v-model="ponto.datapont" @input="$refs.menu.save(ponto.datapont)"></v-date-picker>
 
             </v-menu>
         </v-flex>
@@ -34,7 +40,7 @@
                 label="Entrada"
                 v-model="ponto.ent1"
                 type="time"
-                @keypress.enter="console.log(ponto)"
+                @keypress.enter="commitReg(ponto)"
             ></v-text-field>
         </v-flex>
 
@@ -43,6 +49,7 @@
                 label="Almoço"
                 v-model="ponto.ent2"
                 type="time"
+                @keypress.enter="commitReg(ponto)"
             ></v-text-field>
         </v-flex>
 
@@ -51,6 +58,7 @@
                 label="Retorno"
                 v-model="ponto.sai1"
                 type="time"
+                @keypress.enter="commitReg(ponto)"
             ></v-text-field>
         </v-flex>
 
@@ -59,6 +67,7 @@
                 label="Saída"
                 v-model="ponto.sai2"
                 type="time"
+                @keypress.enter="commitReg(ponto)"
             ></v-text-field>
         </v-flex>
 
@@ -66,36 +75,51 @@
             <v-text-field
                 label="Observação"
                 v-model="ponto.obs"
+                @keypress.enter="commitReg(ponto)"
             ></v-text-field>
         </v-flex>
 
       </v-layout>
     </v-container>
-
-    {{ this.$store.state.ponto }}
+    {{ponto}}
+    {{this.$store.state.ponto}}
   </v-form>
 
 </template>
 
 <script>
 
+import { mapFields } from 'vuex-map-fields';
+import {db} from '../../config/db'
+
 export default {
     name: "RegistraPonto",
     data () {
-        const ponto = this.$store.state.ponto
-    
-      return {
-          ponto: {
-              datapont: ponto.datapont,
-              ent1: ponto.ent1,
-              sai1: ponto.sai1,
-              ent2: ponto.ent2,
-              sai2: ponto.sai2,
-              obs: ponto.obs,
-          },
-        menu:false,
-        newponto: null
-      }
+        return {
+            menu:false
+        }
+    },
+    methods: {
+        commitReg () {
+            const ponto = this.$store.state.ponto
+            if (ponto.id)
+                db.collection('ponto').doc(ponto.id).update(ponto)
+            else
+                db.collection('ponto').add(ponto)
+        }
+    },
+    computed: {
+        ...mapFields([
+            'ponto',
+            'ponto.id',
+            'ponto.data',
+            'ponto.ent1',
+            'ponto.sai1',
+            'ponto.ent2',
+            'ponto.sai2',
+            'ponto.obs',
+            'formatData'
+        ])
     }
 }
 </script>
