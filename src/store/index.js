@@ -4,7 +4,7 @@ import { getField, updateField } from 'vuex-map-fields';
 
 Vue.use(Vuex)
 
-const initState = {
+const defaultState = () => ({
     id: null,
     data: (new Date()), //( (new Date()).toLocaleDateString().split('/').reverse().join('-') ),
     ent1: null,
@@ -14,7 +14,9 @@ const initState = {
     obs: null,
     formatData: (new Date()).toLocaleDateString().split('/').reverse().join('-')
     
-}
+});
+
+const initState = defaultState()
 
 const store = new Vuex.Store({
     strict: true,
@@ -41,7 +43,7 @@ const store = new Vuex.Store({
             context.commit('updateField', { path: 'formatData', value: (new Date(payload.ponto.data)).toISOString().slice(0,10) })
         },
         resetPonto (context) {
-            context.dispatch('savePonto', { ponto: initState } )
+            context.dispatch('savePonto', { ponto: defaultState() } )
         }
     }
 })

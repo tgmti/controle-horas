@@ -96,14 +96,15 @@ export default {
             return !data ? null : (new Date(data)).toISOString().slice(0,10).split('-').reverse().join("/")
         },
         loadRegistro (id) {
-            db.collection(COLLECTION_PONTO).doc(id).get().then( (ponto) =>
-                this.$store.dispatch('savePonto', { ponto: ponto.data() } )
-            )
+            db.collection(COLLECTION_PONTO).doc(id).get().then( (resp) => {
+                let registro = resp.data()
+                registro.id = resp.id
+                return this.$store.dispatch('savePonto', { ponto: registro } )
+            })
+            //console.log(ponto)
             //this.$store.commit('updateField', { path: 'ponto', value: ponto.data() } )
             //console.log(ponto)
             //this.$store.commit('updateField', {path: 'formatData', value: '2018-12-04'} )
-
-
         }
     }
 }
