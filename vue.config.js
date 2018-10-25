@@ -5,5 +5,6 @@ module.exports = {
     plugins: [
       new VuetifyLoaderPlugin()
     ]
-  }
+  },
+  baseUrl: '/controle-horas'
 }
