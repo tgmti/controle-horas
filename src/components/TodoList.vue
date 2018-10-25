@@ -1,5 +1,5 @@
 <template>
-    <div id='todo'>
+    <div class='todolist'>
         <h2>TODO:</h2>
         <ul>
             <li>Calcular total de horas</li>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-    name: 'Todo'
+    name: 'TodoList'
 }
 </script>
 
