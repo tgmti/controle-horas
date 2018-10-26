@@ -4,8 +4,6 @@
 
       <v-content>
         <Ponto></Ponto>
-        <TodoList></TodoList>
-
       </v-content>
 
       <AppFooter></AppFooter>
@@ -17,8 +15,6 @@
 import AppHeader from './components/template/AppHeader'
 import AppFooter from './components/template/AppFooter'
 import Ponto from './components/ponto/Ponto'
-import TodoList from './components/TodoList'
-
 import store from './store'
 
 export default {
@@ -27,8 +23,7 @@ export default {
   components: {
     AppHeader,
     AppFooter,
-    Ponto,
-    TodoList
+    Ponto
   },
   data () {
     return {}
