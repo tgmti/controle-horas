@@ -6,13 +6,12 @@ Vue.use(Vuex)
 
 const defaultState = () => ({
     id: null,
-    data: (new Date()), //( (new Date()).toLocaleDateString().split('/').reverse().join('-') ),
+    data: ( (new Date()).toLocaleDateString().split('/').reverse().join('-') ),
     ent1: null,
     sai1: null,
     ent2: null,
     sai2: null,
-    obs: null,
-    formatData: (new Date()).toLocaleDateString().split('/').reverse().join('-')
+    obs: null
     
 });
 
@@ -40,7 +39,6 @@ const store = new Vuex.Store({
     actions: {
         savePonto (context, payload) {
             context.commit('savePonto', payload.ponto)
-            context.commit('updateField', { path: 'formatData', value: (new Date(payload.ponto.data)).toISOString().slice(0,10) })
         },
         resetPonto (context) {
             context.dispatch('savePonto', { ponto: defaultState() } )
