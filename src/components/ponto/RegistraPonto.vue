@@ -19,7 +19,7 @@
                 label="Entrada"
                 v-model="ent1"
                 type="time"
-                @keypress.enter="commitReg()"
+                @keypress.enter="commitReg"
             ></v-text-field>
         </v-flex>
 
@@ -28,7 +28,7 @@
                 label="Almoço"
                 v-model="sai1"
                 type="time"
-                @keypress.enter="commitReg()"
+                @keypress.enter="commitReg"
             ></v-text-field>
         </v-flex>
 
@@ -37,7 +37,7 @@
                 label="Retorno"
                 v-model="ent2"
                 type="time"
-                @keypress.enter="commitReg()"
+                @keypress.enter="commitReg"
             ></v-text-field>
         </v-flex>
 
@@ -46,7 +46,7 @@
                 label="Saída"
                 v-model="sai2"
                 type="time"
-                @keypress.enter="commitReg()"
+                @keypress.enter="commitReg"
             ></v-text-field>
         </v-flex>
 
@@ -54,11 +54,11 @@
             <v-text-field
                 label="Observação"
                 v-model="obs"
-                @keypress.enter="commitReg()"
+                @keypress.enter="commitReg"
             ></v-text-field>
         </v-flex>
         <v-flex xs12 sm3>
-            <v-btn fab dark small color="primary" @click="commitReg()">
+            <v-btn fab dark small color="primary" @click="commitReg">
                 <v-icon dark>{{id ? 'refresh': 'add' }}</v-icon>
             </v-btn>
             <v-btn fab dark small color="grey" @click="resetForm">

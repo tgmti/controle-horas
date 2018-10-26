@@ -13,6 +13,9 @@
             <li>Ajustar campo hora do Registro ponto</li>
             <li>Criar coleção para configurações, adicionar a tolerancia de 10 minutos para o ponto</li>
             <li>Melhorar visual</li>
+            <li>Separar as movimentações do backend em outro arquivo</li>
+            <li>Carregar o objeto no mount quando a data já existir na collection (unique key)</li>
+            <li>Descobrir pq com enter recarrega a table e com o botão não</li>
         </ul>
     </div>
 </template>
