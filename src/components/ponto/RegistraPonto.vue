@@ -5,34 +5,13 @@
       <v-layout row wrap>
 
         <v-flex xs12 sm3>
-            <v-menu
-                ref="menu"
-                :close-on-content-click="false"
-                v-model="menu"
-                :nudge-right="40"
-                :return-value.sync="data"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-            >
-                <v-date-picker 
-                    v-model="formatData" 
-                    :formatted-value.sync="formatData"
-                    @input="$refs.menu.save(formatData)">
-                </v-date-picker>
+            <v-text-field
+                v-model="data"
+                label="Data"
+                prepend-icon="event"
+                type="date"
+            ></v-text-field>
 
-                <v-text-field
-                    slot="activator"
-                    v-model="formatData"
-                    @input="$refs.menu.save(formatData)"
-                    label="Data"
-                    prepend-icon="event"
-                    type="date"
-                ></v-text-field>
-
-            </v-menu>
         </v-flex>
 
         <v-flex xs6 sm1>
@@ -40,7 +19,7 @@
                 label="Entrada"
                 v-model="ent1"
                 type="time"
-                @keypress.enter="commitReg()"
+                @keypress.enter="commitReg"
             ></v-text-field>
         </v-flex>
 
@@ -49,7 +28,7 @@
                 label="Almoço"
                 v-model="sai1"
                 type="time"
-                @keypress.enter="commitReg()"
+                @keypress.enter="commitReg"
             ></v-text-field>
         </v-flex>
 
@@ -58,7 +37,7 @@
                 label="Retorno"
                 v-model="ent2"
                 type="time"
-                @keypress.enter="commitReg()"
+                @keypress.enter="commitReg"
             ></v-text-field>
         </v-flex>
 
@@ -67,7 +46,7 @@
                 label="Saída"
                 v-model="sai2"
                 type="time"
-                @keypress.enter="commitReg()"
+                @keypress.enter="commitReg"
             ></v-text-field>
         </v-flex>
 
@@ -75,11 +54,11 @@
             <v-text-field
                 label="Observação"
                 v-model="obs"
-                @keypress.enter="commitReg()"
+                @keypress.enter="commitReg"
             ></v-text-field>
         </v-flex>
         <v-flex xs12 sm3>
-            <v-btn fab dark small color="primary" @click="commitReg()">
+            <v-btn fab dark small color="primary" @click="commitReg">
                 <v-icon dark>{{id ? 'refresh': 'add' }}</v-icon>
             </v-btn>
             <v-btn fab dark small color="grey" @click="resetForm">
@@ -108,8 +87,8 @@
         },
         methods: {
             commitReg () {
-                if (this.$store.state.id)
-                    db.collection(COLLECTION_PONTO).doc(this.$store.state.id).update(this.ponto).then(
+                if (this.id)
+                    db.collection(COLLECTION_PONTO).doc(this.id).update(this.ponto).then(
                         this.$store.dispatch('resetPonto')
                     )
                 else
@@ -129,12 +108,10 @@
                 'sai1',
                 'ent2',
                 'sai2',
-                'obs',
-                'formatData'
+                'obs'
             ]),
             ponto () {
                 return {
-                    id : this.$store.state.id,
                     data : this.$store.state.data,
                     ent1 : this.$store.state.ent1,
                     sai1 : this.$store.state.sai1,

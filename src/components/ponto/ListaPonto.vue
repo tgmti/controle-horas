@@ -67,18 +67,13 @@ export default {
       return {
         search: null,
         headers: [
-            {
-                text: 'Data',
-                align: 'left',
-                sortable: true,
-                value: 'data'
-            },
-            { text: 'Entrada',    value: 'ent1' },
-            { text: 'Almoço',     value: 'sai1' },
-            { text: 'Retorno',    value: 'ent2' },
-            { text: 'Saída',      value: 'sai2' },
+            { text: 'Data'      , value: 'data', align: 'left' },
+            { text: 'Entrada'   , value: 'ent1' },
+            { text: 'Almoço'    , value: 'sai1' },
+            { text: 'Retorno'   , value: 'ent2' },
+            { text: 'Saída'     , value: 'sai2' },
             { text: 'Observação', value: 'obs'  },
-            { text: 'Actions', value: 'name', sortable: false }
+            { text: 'Actions'   , value: 'name', sortable: false }
         ],
         registros: []
       }
@@ -93,7 +88,7 @@ export default {
             db.collection(COLLECTION_PONTO).doc(id).delete()
         },
         formatData: (data) => {
-            return !data ? null : (new Date(data)).toISOString().slice(0,10).split('-').reverse().join("/")
+            return !data || typeof data !== "string" ? null : (new Date(data)).toISOString().slice(0,10).split('-').reverse().join("/")
         },
         loadRegistro (id) {
             db.collection(COLLECTION_PONTO).doc(id).get().then( (resp) => {
