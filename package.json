@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
-    "lint": "vue-cli-service lint"
+    "serve": "cross-env NODE_ENV=development vue-cli-service serve",
+    "build": "cross-env NODE_ENV=production vue-cli-service build",
+    "deploy": "cross-env NODE_ENV=production push-dir --dir=dist --branch=gh-pages --cleanup",
+    "lint": "vue-cli-service lint",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-rc.1",
@@ -23,11 +24,16 @@
     "@vue/cli-plugin-babel": "^3.0.5",
     "@vue/cli-plugin-eslint": "^3.0.5",
     "@vue/cli-service": "^3.0.5",
+    "@vue/test-utils": "^1.0.0-beta.25",
+    "babel-jest": "^23.6.0",
     "babel-plugin-transform-imports": "^1.5.0",
+    "cross-env": "^5.2.0",
+    "jest": "^23.6.0",
     "push-dir": "^0.4.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.2.1",
+    "vue-jest": "^3.0.0",
     "vue-template-compiler": "^2.5.17",
     "vuetify-loader": "^1.0.5"
   },
@@ -54,5 +60,19 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 10"
-  ]
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    }
+  }
 }
