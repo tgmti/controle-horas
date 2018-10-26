@@ -1,5 +1,6 @@
-module.exports = {
+module.exports =   {
   "presets": [
+    ["@babel/preset-env", { "modules": false }],
     [
       "@vue/app",
       {
@@ -7,6 +8,13 @@ module.exports = {
       }
     ]
   ],
+  "env": {
+    "test": {
+      "presets": [
+        ["@babel/preset-env", { "targets": { "node": "current" }}]
+      ]
+    }
+  },
   "plugins": [
     [
       "transform-imports",
@@ -19,3 +27,4 @@ module.exports = {
     ]
   ]
 }
+

@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production vue-cli-service build",
     "deploy": "cross-env NODE_ENV=production push-dir --dir=dist --branch=gh-pages --cleanup",
     "lint": "vue-cli-service lint",
-    "test": "jest"
+    "test": "cross-env NODE_ENV=test jest"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-rc.1",
@@ -21,10 +21,12 @@
     "vuex-map-fields": "^1.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
     "@vue/cli-plugin-babel": "^3.0.5",
     "@vue/cli-plugin-eslint": "^3.0.5",
     "@vue/cli-service": "^3.0.5",
     "@vue/test-utils": "^1.0.0-beta.25",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-transform-imports": "^1.5.0",
     "cross-env": "^5.2.0",
@@ -73,6 +75,15 @@
     },
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/src/$1"
-    }
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,vue}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "html",
+      "text-summary"
+    ]
   }
 }

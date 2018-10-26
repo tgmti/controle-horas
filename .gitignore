@@ -23,3 +23,6 @@ yarn-error.log*
 # Configurações do Firebase
 src/config/firebase.js
 src/config/db.js
+
+# Coverage
+/coverage
