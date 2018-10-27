@@ -1,5 +1,6 @@
 module.exports = {
   "presets": [
+    ["env", { "modules": false }],
     [
       "@vue/app",
       {
@@ -7,7 +8,15 @@ module.exports = {
       }
     ]
   ],
+  "env": {
+    "test": {
+      "presets": [
+        ["env", { "targets": { "node": "current" }}]
+      ]
+    }
+  },
   "plugins": [
+    
     [
       "transform-imports",
       {
