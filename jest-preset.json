@@ -1,0 +1,6 @@
+{
+  "name": "controle-horas",
+  "jest": {
+    "verbose": true
+  }
+}
