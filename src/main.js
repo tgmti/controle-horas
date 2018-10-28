@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-
 import '@babel/polyfill'
 import './plugins/vuetify'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'

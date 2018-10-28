@@ -1,6 +1,8 @@
+
+const preventFullImport = !(process.env.NODE_ENV === 'test')
+
 module.exports = {
   "presets": [
-    ["env", { "modules": false }],
     [
       "@vue/app",
       {
@@ -8,21 +10,13 @@ module.exports = {
       }
     ]
   ],
-  "env": {
-    "test": {
-      "presets": [
-        ["env", { "targets": { "node": "current" }}]
-      ]
-    }
-  },
   "plugins": [
-    
     [
       "transform-imports",
       {
         "vuetify": {
           "transform": "vuetify/es5/components/${member}", // eslint-disable-line no-template-curly-in-string
-          "preventFullImport": true
+          "preventFullImport": preventFullImport
         }
       }
     ]
