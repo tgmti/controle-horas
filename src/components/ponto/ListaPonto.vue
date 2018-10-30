@@ -57,7 +57,7 @@
 
 <script>
 
-import db, {COLLECTION_PONTO} from '../../config/db'
+import db, {COLLECTION_PONTO} from '@/config/db'
 
 export default {
 
@@ -88,7 +88,7 @@ export default {
             db.collection(COLLECTION_PONTO).doc(id).delete()
         },
         formatData: (data) => {
-            return !data || typeof data !== "string" ? null : (new Date(data)).toISOString().slice(0,10).split('-').reverse().join("/")
+            return !data || typeof data !== 'string' ? null : (new Date(data)).toISOString().slice(0,10).split('-').reverse().join('/')
         },
         loadRegistro (id) {
             db.collection(COLLECTION_PONTO).doc(id).get().then( (resp) => {

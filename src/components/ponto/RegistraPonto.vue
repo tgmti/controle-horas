@@ -76,7 +76,7 @@
 <script>
 
     import { mapFields } from 'vuex-map-fields';
-    import db, {COLLECTION_PONTO} from '../../config/db'
+    import db, {COLLECTION_PONTO} from '@/config/db'
 
     export default {
         name: "RegistraPonto",

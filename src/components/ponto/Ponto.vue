@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import RegistraPonto from './RegistraPonto'
-import ListaPonto from './ListaPonto'
+import RegistraPonto from '@/components/ponto/RegistraPonto'
+import ListaPonto from '@/components/ponto/ListaPonto'
 
 export default {
   name: 'Ponto',

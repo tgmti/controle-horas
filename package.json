@@ -7,6 +7,7 @@
     "build": "vue-cli-service build",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
     "test": "vue-cli-service test:unit --watch",
+    "test:nowatch": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
