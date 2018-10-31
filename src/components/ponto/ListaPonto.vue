@@ -57,7 +57,7 @@
 
 <script>
 
-import db, {COLLECTION_PONTO} from '@/config/db'
+import {db, COLLECTION_PONTO} from '@/store'
 
 export default {
 

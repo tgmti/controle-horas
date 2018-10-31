@@ -1,8 +1,24 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueFire from 'vuefire'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+
 import { getField, updateField } from 'vuex-map-fields';
 
+import configdb from '@/config/db'
+
 Vue.use(Vuex)
+Vue.use(VueFire)
+
+export const COLLECTION_PONTO = 'ponto'
+
+firebase.initializeApp(configdb)
+export const db = firebase.firestore()
+
+db.settings({
+    timestampsInSnapshots: true
+})
 
 const defaultState = () => ({
     id: null,
@@ -15,6 +31,16 @@ const defaultState = () => ({
     
 });
 
+const savePonto = (state, payload) => {
+    state.id = payload.id
+    state.data = payload.data
+    state.ent1 = payload.ent1
+    state.sai1 = payload.sai1
+    state.ent2 = payload.ent2
+    state.sai2 = payload.sai2
+    state.obs = payload.obs
+}
+
 const initState = defaultState()
 
 const store = new Vuex.Store({
@@ -22,16 +48,7 @@ const store = new Vuex.Store({
     state : initState,
     mutations: {
         updateField,
-        savePonto (state, payload) {
-            state.id = payload.id
-            state.data = payload.data
-            state.ent1 = payload.ent1
-            state.sai1 = payload.sai1
-            state.ent2 = payload.ent2
-            state.sai2 = payload.sai2
-            state.obs = payload.obs
-        }
-
+        savePonto
     },
     getters: {
         getField
@@ -47,3 +64,4 @@ const store = new Vuex.Store({
 })
 
 export default store
+

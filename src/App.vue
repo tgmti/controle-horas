@@ -15,11 +15,9 @@
 import AppHeader from '@/components/template/AppHeader'
 import AppFooter from '@/components/template/AppFooter'
 import Ponto from '@/components/ponto/Ponto'
-import store from '@/store'
 
 export default {
   name: 'App',
-  store,
   components: {
     AppHeader,
     AppFooter,

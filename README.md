@@ -36,7 +36,7 @@ npm install
 Copy db.example.js to db.js, and modify config const
 ```
 // src\config\db.js
-const config = {
+const configdb = {
   apiKey: "",
   authDomain: "",
   databaseURL: "",
@@ -44,6 +44,8 @@ const config = {
   storageBucket: "",
   messagingSenderId: ""
 };
+
+export default configdb;
 ```
 
 ### Compiles and hot-reloads for development
