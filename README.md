@@ -76,7 +76,8 @@ npm run lint
 
 ## Todo List
 
- - [ ] Vue testes
+ - [X] Vue testes
+ - [ ] Componentizar melhor os elementos, para tornar testáveis
  - [ ] Documentar Stack utilizada
  - [ ] Calcular total de horas
  - [ ] Converter para hora decimal
