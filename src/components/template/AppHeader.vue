@@ -14,22 +14,23 @@
         <v-list>
             <v-list-tile
             value="true"
-            v-for="(item, i) in items"
-            :key="i"
+            v-for="(item, i) in items" :key="i"
             >
-            <v-list-tile-action>
-                <v-icon v-html="item.icon"></v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-                <v-list-tile-title v-text="item.title"></v-list-tile-title>
-            </v-list-tile-content>
+                <router-link :to="item.path">
+                    <v-list-tile-action>
+                        <v-icon v-html="item.icon"></v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title v-text="item.name"></v-list-tile-title>
+                    </v-list-tile-content>
+                </router-link>
             </v-list-tile>
         </v-list>
         </v-navigation-drawer>
 
         <v-toolbar
-        app
-        :clipped-left="clipped"
+            app
+            :clipped-left="clipped"
         >
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-btn icon @click.stop="miniVariant = !miniVariant">
@@ -72,14 +73,13 @@
 </template>
 
 <script>
+import {routes} from "@/router"
+
 export default {
     name: "AppHeader",
     data () {
         return {
-            items: [{
-                icon: 'bubble_chart',
-                title: 'Inspire'
-            }],
+            items: routes,
 
             fixed: false,
             rightDrawer: false,
@@ -88,7 +88,7 @@ export default {
             drawer: true,
             miniVariant: false,
             right: true,
-            title: 'Vuetify.js'
+            title: 'Controle de Horas'
 
         }
     }

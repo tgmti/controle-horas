@@ -3,7 +3,7 @@
       <AppHeader></AppHeader>
 
       <v-content>
-        <Ponto></Ponto>
+        <router-view></router-view>
       </v-content>
 
       <AppFooter></AppFooter>
@@ -14,14 +14,12 @@
 <script>
 import AppHeader from '@/components/template/AppHeader'
 import AppFooter from '@/components/template/AppFooter'
-import Ponto from '@/components/ponto/Ponto'
 
 export default {
   name: 'App',
   components: {
     AppHeader,
-    AppFooter,
-    Ponto
+    AppFooter
   },
   data () {
     return {}
