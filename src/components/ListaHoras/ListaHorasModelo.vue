@@ -1,7 +1,7 @@
 <template>
     
      <ListaHoras
-        title="Lista Horas Teste"
+        title="Lista Horas Modelo"
         :headers="headers"
         :items="items"
         :fnLoadReg="fnLoadReg"
@@ -18,7 +18,7 @@ const fnLoadReg = function(item) {
 }
 
 export default {
-    name: 'ListaHorasTest',
+    name: 'ListaHorasModelo',
     
     components: {
         ListaHoras

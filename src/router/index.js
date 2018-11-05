@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Ponto from '@/components/ponto/Ponto'
-import ListaHorasTest from '@/components/ListaHoras/ListaHorasTest'
+import ListaHorasModelo from '@/components/ListaHoras/ListaHorasModelo'
 
 Vue.use(VueRouter);
 
 export const routes = [
     {
-        path: '/controle-horas/',
+        path: '/controle-horas/', 
         name: 'Home',
-        component: Ponto,
         icon: 'home',
+        redirect: '/controle-horas/ponto'
     },
     
     {
@@ -20,9 +20,9 @@ export const routes = [
         icon: 'timer',
     },
     {
-        path: '/controle-horas/teste',
-        name: 'ListaHorasTest',
-        component: ListaHorasTest,
+        path: '/controle-horas/ListaHorasModelo',
+        name: 'ListaHorasModelo',
+        component: ListaHorasModelo,
         icon: 'bubble_chart',
     }
 ]
