@@ -2,7 +2,7 @@
 
     <v-card>
         <v-card-title>
-            {{title}}
+            <span>{{title}}</span>
             <v-spacer></v-spacer>
             <v-text-field
                 v-model="search"
