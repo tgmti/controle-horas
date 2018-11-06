@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import { getField, updateField } from 'vuex-map-fields';
 
 import ponto from '@/store/ponto'
+import atendimento from '@/store/atendimento'
 
 Vue.use(Vuex)
 
@@ -48,7 +49,8 @@ const store = new Vuex.Store({
         }
     },
     modules: {
-        ponto
+        ponto,
+        atendimento
     }
 })
 
