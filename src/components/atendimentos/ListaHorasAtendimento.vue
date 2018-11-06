@@ -11,26 +11,18 @@
 
 <script>
 import ListaHoras from '@/components/template/ListaHoras'
-
 import { mapState } from 'vuex'
 
-const fnLoadReg = function(item) { 
-    console.log('fnLoadReg') 
-    console.log(item.data) 
-}
-
-
 export default {
-    name: 'ListaHorasAtendimento',
-    
+    name: 'ListaHorasAtendimento',    
     components: {
         ListaHoras
     },
-
    data () {
       return {
-        search: null,
-        fnLoadReg: fnLoadReg
+        fnLoadReg: function(item) { 
+            return item;
+        }
       }
    },
 	computed: {

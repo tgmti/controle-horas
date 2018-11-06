@@ -55,15 +55,13 @@
 
 <script>
 
-function data () {
-    return {
-    search: null,
-    }
-}
-
 export default {
     name: "ListaHoras",
-    data,
+    data () {
+        return {
+            search: null,
+        }
+    },
     props: {
         title : { type : String , required: true },
         headers: { type: Array, required: true },
@@ -72,8 +70,8 @@ export default {
         fnDelete: { type: Function, required: false }
     },
     methods: { 
-        loadReg: function(item){ this.fnLoadReg ? this.fnLoadReg(item) : console.log(item)}, 
-        delReg: function(item){ this.fnDelete ? this.fnDelete(item) : console.log(item)},
+        loadReg: function(item){ this.fnLoadReg ? this.fnLoadReg(item) : true}, 
+        delReg: function(item){ this.fnDelete ? this.fnDelete(item) : true},
         formatData: (data) => (
             !data || typeof data !== 'string' ? null : (new Date(data)).toISOString().slice(0,10).split('-').reverse().join('/')
         )

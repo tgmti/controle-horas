@@ -12,7 +12,16 @@ const state = {
 		{ text: 'Retorno'   , value: 'ent2' },
 		{ text: 'Saída'     , value: 'sai2' },
 		{ text: 'Observação', value: 'obs'  }
-	]
+	],
+	defaultItem : () => ({
+		id: null,
+		data: ( (new Date()).toLocaleDateString().split('/').reverse().join('-') ),
+		ent1: null,
+		sai1: null,
+		ent2: null,
+		sai2: null,
+		obs: null
+	})
 }
 
 const formatReg = (reg) => ({
