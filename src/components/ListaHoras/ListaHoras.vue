@@ -23,7 +23,7 @@
                 slot="items" slot-scope="props"
             >
                 <td v-for="(header, i) in headers"  :key="i" >
-                    {{props.item[header.value]}}
+                    {{header.type === 'date' ? formatData(props.item[header.value]) : props.item[header.value]}}
                 </td>
 
                 <td class="justify-center layout px-0" >    
@@ -73,7 +73,10 @@ export default {
     },
     methods: { 
         loadReg: function(item){ this.fnLoadReg ? this.fnLoadReg(item) : console.log(item)}, 
-        delReg: function(item){ this.fnDelete ? this.fnDelete(item) : console.log(item)}, 
+        delReg: function(item){ this.fnDelete ? this.fnDelete(item) : console.log(item)},
+        formatData: (data) => (
+            !data || typeof data !== 'string' ? null : (new Date(data)).toISOString().slice(0,10).split('-').reverse().join('/')
+        )
     }
 }
 
