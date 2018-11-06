@@ -1,24 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueFire from 'vuefire'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
 
 import { getField, updateField } from 'vuex-map-fields';
 
-import configdb from '@/config/db'
+import ponto from '@/store/ponto'
 
 Vue.use(Vuex)
-Vue.use(VueFire)
-
-export const COLLECTION_PONTO = 'ponto'
-
-firebase.initializeApp(configdb)
-export const db = firebase.firestore()
-
-db.settings({
-    timestampsInSnapshots: true
-})
 
 const defaultState = () => ({
     id: null,
@@ -28,7 +15,6 @@ const defaultState = () => ({
     ent2: null,
     sai2: null,
     obs: null
-    
 });
 
 const savePonto = (state, payload) => {
@@ -60,6 +46,9 @@ const store = new Vuex.Store({
         resetPonto (context) {
             context.dispatch('savePonto', { ponto: defaultState() } )
         }
+    },
+    modules: {
+        ponto
     }
 })
 

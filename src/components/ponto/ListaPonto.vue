@@ -12,7 +12,7 @@
 
 <script>
 import ListaHoras from '@/components/ListaHoras/ListaHoras'
-import {db, COLLECTION_PONTO} from '@/store'
+import {db, COLLECTION_PONTO} from '@/store/firedb'
 
 const headers = [
     { text: 'Data'      , value: 'data', align: 'left' },

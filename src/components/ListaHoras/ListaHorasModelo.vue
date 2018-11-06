@@ -12,10 +12,13 @@
 <script>
 import ListaHoras from '@/components/ListaHoras/ListaHoras'
 
+import { mapState } from 'vuex'
+
 const fnLoadReg = function(item) { 
     console.log('fnLoadReg') 
     console.log(item.data) 
 }
+
 
 export default {
     name: 'ListaHorasModelo',
@@ -31,10 +34,18 @@ export default {
             { text: 'Data'      , value: 'data', align: 'left' },
             { text: 'Entrada'   , value: 'ent1' }
         ],
-        items: [{ data:'2018-09-20', ent1: '11:58' },{ data:'2018-09-20', ent1: '11:59' }],
         fnLoadReg: fnLoadReg
       }
-   }    
+   },
+	computed: {
+		...mapState({
+			items: state => state.ponto.registros
+        })
+    },
+    created () {
+        this.$store.dispatch('ponto/get');
+    }
+
 }
 </script>
 
