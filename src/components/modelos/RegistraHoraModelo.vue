@@ -75,6 +75,7 @@
 
 <script>
 
+    import { mapState } from 'vuex'
     import { mapFields } from 'vuex-map-fields';
     import {db, COLLECTION_PONTO} from '@/store/firedb'
 

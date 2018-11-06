@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ListaHoras from '@/components/ListaHoras/ListaHoras'
+import ListaHoras from '@/components/template/ListaHoras'
 import {db, COLLECTION_PONTO} from '@/store/firedb'
 
 const headers = [

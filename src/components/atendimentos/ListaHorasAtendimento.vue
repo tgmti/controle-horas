@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ListaHoras from '@/components/ListaHoras/ListaHoras'
+import ListaHoras from '@/components/template/ListaHoras'
 
 import { mapState } from 'vuex'
 
