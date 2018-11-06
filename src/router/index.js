@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Ponto from '@/components/ponto/Ponto'
-import ListaHorasModelo from '@/components/modelos/ListaHorasModelo'
+import Modelo from '@/components/modelos/Modelo'
 import Atendimento from '@/components/atendimentos/Atendimento'
 
 Vue.use(VueRouter);
@@ -26,9 +26,9 @@ export const routes = [
         icon: 'work',
     },
     {
-        path: '/controle-horas/ListaHorasModelo',
-        name: 'ListaHorasModelo',
-        component: ListaHorasModelo,
+        path: '/controle-horas/modelo',
+        name: 'Modelo',
+        component: Modelo,
         icon: 'bubble_chart',
     }
 ]
