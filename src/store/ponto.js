@@ -3,6 +3,14 @@ import {db, COLLECTION_PONTO} from '@/store/firedb'
 
 const state = {
 	registros : [],
+	headers : [
+		{ text: 'Data'      , value: 'data', align: 'left', type: 'date' },
+		{ text: 'Entrada'   , value: 'ent1' },
+		{ text: 'Almoço'    , value: 'sai1' },
+		{ text: 'Retorno'   , value: 'ent2' },
+		{ text: 'Saída'     , value: 'sai2' },
+		{ text: 'Observação', value: 'obs'  }
+	]
 }
 
 const formatPonto = (reg) => ({

@@ -30,16 +30,13 @@ export default {
    data () {
       return {
         search: null,
-        headers: [
-            { text: 'Data'      , value: 'data', align: 'left' },
-            { text: 'Entrada'   , value: 'ent1' }
-        ],
         fnLoadReg: fnLoadReg
       }
    },
 	computed: {
 		...mapState({
-			items: state => state.ponto.registros
+            items: state => state.ponto.registros,
+            headers: state => state.ponto.headers
         })
     },
     created () {
