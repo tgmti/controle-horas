@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Ponto from '@/components/ponto/Ponto'
-import ListaHorasModelo from '@/components/ListaHoras/ListaHorasModelo'
+import ListaHorasModelo from '@/components/modelos/ListaHorasModelo'
 import Atendimento from '@/components/atendimentos/Atendimento'
 
 Vue.use(VueRouter);

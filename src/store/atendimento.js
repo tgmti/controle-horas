@@ -1,7 +1,7 @@
 
 import {db} from '@/store/firedb'
 
-const COLLECTION_ATEND = 'atendimento';
+const COLLECTION_NAME = 'atendimento';
 
 const state = {
 	registros : [],
@@ -32,10 +32,9 @@ const formatReg = (reg) => ({
     ttd : reg.ttd
 })
 
-
 const mutations = {
-	SET_REGISTRO (state, { ret }) {
-		state.registros.push(formatReg( ret.data() ))
+	ADD_REGISTRO (state, { doc }) {
+		state.registros.push(formatReg( doc.data() ))
 	},
 	RESET_REGISTRO (state) {
 		state.registros = [];
@@ -44,10 +43,15 @@ const mutations = {
 
 const actions = {
 	async get ({ commit }) {
-		let convoRef = db.collection(COLLECTION_ATEND)
-		let convos = await convoRef.get()
-		commit('RESET_REGISTRO')
-		convos.forEach(reg => commit('SET_REGISTRO', { reg }))
+
+		let collectionRef = db.collection(COLLECTION_NAME)
+		collectionRef.onSnapshot(snapRef => {
+			//let source = convo.metadata.hasPendingWrites ? 'Local' : 'Server'
+			if (snapRef && snapRef.docs) {
+				commit('RESET_REGISTRO')
+				snapRef.docs.forEach(doc => commit('ADD_REGISTRO', { doc }) )
+			}
+		})
 	}
 }
 

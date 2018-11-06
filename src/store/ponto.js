@@ -1,5 +1,7 @@
 
-import {db, COLLECTION_PONTO} from '@/store/firedb'
+import {db} from '@/store/firedb'
+
+const COLLECTION_NAME = 'ponto'
 
 const state = {
 	registros : [],
@@ -13,7 +15,7 @@ const state = {
 	]
 }
 
-const formatPonto = (reg) => ({
+const formatReg = (reg) => ({
 	data : reg.data,
 	ent1 : reg.ent1,
 	sai1 : reg.sai1,
@@ -25,9 +27,8 @@ const formatPonto = (reg) => ({
 
 const mutations = {
 
-	SET_REGISTRO (state, { ponto }) {
-		const data = ponto.data()
-		state.registros.push(formatPonto(data))
+	ADD_REGISTRO (state, { doc }) {
+		state.registros.push(formatReg( doc.data() ))
 	},
 
 	RESET_REGISTRO (state) {
@@ -76,10 +77,21 @@ const actions = {
 
 	async get ({ commit }) {
 		
-		let convoRef = db.collection(COLLECTION_PONTO)
-		let convos = await convoRef.get()
-		commit('RESET_REGISTRO')
-		convos.forEach(ponto => commit('SET_REGISTRO', { ponto }))
+		let collectionRef = db.collection(COLLECTION_NAME)
+
+		//console.log(collectionRef)
+		//let convos = await collectionRef.get()
+		
+		//convos.forEach(ponto => commit('SET_REGISTRO', { ponto }))
+		
+		collectionRef.onSnapshot(snapRef => {
+			//let source = convo.metadata.hasPendingWrites ? 'Local' : 'Server'
+			if (snapRef && snapRef.docs) {
+				commit('RESET_REGISTRO')
+				snapRef.docs.forEach(doc => commit('ADD_REGISTRO', { doc }) )
+			}
+		})
+
 	}
 }
 
