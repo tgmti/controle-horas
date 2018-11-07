@@ -1,8 +1,8 @@
 
 import {db} from '@/store/firedb'
+import template from '@/store/template'
 
 const COLLECTION_NAME = 'ponto'
-const COLLECTION_REF = db.collection(COLLECTION_NAME)
 
 const state = {
 	registros : [],
@@ -34,65 +34,9 @@ const state = {
 			obs : reg.obs
 		}
 		if (id) ret.id = id;
-	
 		return ret;
 	}
 }
 
-
-const mutations = {
-	ADD_REGISTRO (state, doc) {
-		state.registros.push(state.formatReg( doc.id, doc.data() ))
-	},
-	RESET_REGISTRO (state) {
-		state.registros = [];
-	},
-	EDIT_REGISTRO (state, payload) {
-		state.editedItem = Object.assign({}, payload);
-	},
-	RESET_EDIT (state) {
-		state.editedItem = Object.assign({}, state.defaultItem());
-	}
-}
-
-const actions = {
-	async get ({ commit }) {
-		
-		//console.log(COLLECTION_REF)
-		//let convos = await COLLECTION_REF.get()
-		
-		//convos.forEach(ponto => commit('SET_REGISTRO', { ponto }))
-		
-		COLLECTION_REF.onSnapshot(snapRef => {
-			//let source = convo.metadata.hasPendingWrites ? 'Local' : 'Server'
-			if (snapRef && snapRef.docs) {
-				commit('RESET_REGISTRO')
-				snapRef.docs.forEach(doc => commit('ADD_REGISTRO', doc) )
-			}
-		})
-	},
-	save (context, editedItem ) {
-		const reg = state.formatReg(null, editedItem);
-		const id = editedItem.id
-		const promisse = id ? COLLECTION_REF.doc(id).update(reg) : COLLECTION_REF.add(reg)
-		return promisse;
-	},
-	async edit ({ commit }, item ) {
-		const id = item.id
-		if (id) {
-            COLLECTION_REF.doc(id).get().then( (resp) => {
-				commit('EDIT_REGISTRO', state.formatReg( id, resp.data() ) )
-            })			
-		}
-	},
-	async delete (context, item ) {
-		if (item.id) {
-            COLLECTION_REF.doc(item.id).delete()	
-		}
-	},
-	async reset ({ commit }) {
-		commit('RESET_EDIT')
-	}
-}
-
-export default { namespaced: true, state, mutations, actions }
+const moduleTemplate = template
+export default moduleTemplate(db.collection(COLLECTION_NAME), state)
