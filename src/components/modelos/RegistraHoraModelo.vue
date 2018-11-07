@@ -3,6 +3,7 @@
     <RegistraHora 
         :headers="headers"
         :defaultItem="defaultItem"
+        :fnCommit="fnSave"
     >
 
     </RegistraHora>
@@ -19,14 +20,16 @@ export default {
     components: {
             RegistraHora
     },
+    data () {
+        return {
+            fnSave : (item) => this.$store.dispatch('ponto/save', item)
+        }
+    },
     computed: {
         ...mapState({
             headers: state => state.ponto.headers,
             defaultItem: state => state.ponto.defaultItem(),
         })
-    },
-    created () {
-        //this.$store.dispatch('ponto/get');
     }
 }
 </script>

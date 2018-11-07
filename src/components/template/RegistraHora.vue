@@ -54,8 +54,10 @@ export default {
     },
     methods: {
         commitReg () {
-            if ( this.fnCommit ? this.fnCommit(this.editedItem) : true ) {
-                this.resetForm()
+            if ( this.fnCommit ) {
+                this.fnCommit(this.editedItem).then(
+                    this.resetForm()
+                )
             }
         },
         resetForm () {

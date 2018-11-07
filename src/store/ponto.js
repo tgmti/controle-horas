@@ -2,6 +2,7 @@
 import {db} from '@/store/firedb'
 
 const COLLECTION_NAME = 'ponto'
+const COLLECTION_REF = db.collection(COLLECTION_NAME)
 
 const state = {
 	registros : [],
@@ -24,26 +25,31 @@ const state = {
 	})
 }
 
-const formatReg = (reg) => ({
-	data : reg.data,
-	ent1 : reg.ent1,
-	sai1 : reg.sai1,
-	ent2 : reg.ent2,
-	sai2 : reg.sai2,
-	obs : reg.obs
-})
+const formatReg = function (id, reg) {
+	let ret = {
+		data : reg.data,
+		ent1 : reg.ent1,
+		sai1 : reg.sai1,
+		ent2 : reg.ent2,
+		sai2 : reg.sai2,
+		obs : reg.obs
+	}
+	if (id) ret.id = id;
+
+	return ret;
+}
 
 
 const mutations = {
 
-	ADD_REGISTRO (state, { doc }) {
-		state.registros.push(formatReg( doc.data() ))
+	ADD_REGISTRO (state, doc) {
+		state.registros.push(formatReg( doc.id, doc.data() ))
 	},
 
 	RESET_REGISTRO (state) {
 		state.registros = [];
 	}
-	
+
 	/* 	
 	ADD_MESSAGE (state, { conversationId, message }) {
 		if (!state.allMsgIds.includes(message.id)) {
@@ -86,21 +92,25 @@ const actions = {
 
 	async get ({ commit }) {
 		
-		let collectionRef = db.collection(COLLECTION_NAME)
-
-		//console.log(collectionRef)
-		//let convos = await collectionRef.get()
+		//console.log(COLLECTION_REF)
+		//let convos = await COLLECTION_REF.get()
 		
 		//convos.forEach(ponto => commit('SET_REGISTRO', { ponto }))
 		
-		collectionRef.onSnapshot(snapRef => {
+		COLLECTION_REF.onSnapshot(snapRef => {
 			//let source = convo.metadata.hasPendingWrites ? 'Local' : 'Server'
 			if (snapRef && snapRef.docs) {
 				commit('RESET_REGISTRO')
-				snapRef.docs.forEach(doc => commit('ADD_REGISTRO', { doc }) )
+				snapRef.docs.forEach(doc => commit('ADD_REGISTRO', doc) )
 			}
 		})
+	},
 
+	save (context, editedItem ) {
+		const reg = formatReg(null, editedItem);
+		const id = editedItem.id
+		const promisse = id ? COLLECTION_REF.doc(id).update(reg) : COLLECTION_REF.add(reg)
+		return promisse;
 	}
 }
 
