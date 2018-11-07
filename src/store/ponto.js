@@ -7,10 +7,10 @@ const state = {
 	registros : [],
 	headers : [
 		{ text: 'Data'      , value: 'data', align: 'left', type: 'date' },
-		{ text: 'Entrada'   , value: 'ent1' },
-		{ text: 'Almoço'    , value: 'sai1' },
-		{ text: 'Retorno'   , value: 'ent2' },
-		{ text: 'Saída'     , value: 'sai2' },
+		{ text: 'Entrada'   , value: 'ent1', type: 'time' },
+		{ text: 'Almoço'    , value: 'sai1', type: 'time' },
+		{ text: 'Retorno'   , value: 'ent2', type: 'time' },
+		{ text: 'Saída'     , value: 'sai2', type: 'time' },
 		{ text: 'Observação', value: 'obs'  }
 	],
 	defaultItem : () => ({

@@ -6,11 +6,12 @@
 
         <v-flex 
             v-for="(header, i) in headers"  :key="i"
-            xs6 sm1
+            :class="classDef(header.type)"
         >
             <v-text-field
                 :label="header.text"
                 :type="(header.type || 'text')"
+                v-model="editedItem[header.value]"
                 @keypress.enter="commitReg"
             ></v-text-field>
 
@@ -59,6 +60,11 @@ export default {
         },
         resetForm () {
             this.editedItem = Object.assign({}, this.defaultItem)
+        },
+        classDef (type) {
+            if ( type === 'date') return ['xs12','sm2'];
+            if ( type === 'time') return ['xs6','sm1'];
+            return ['xs12','sm2'];
         }
     }
 }
