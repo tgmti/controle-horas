@@ -3,9 +3,9 @@
     <RegistraHora 
         :headers="headers"
         :defaultItem="defaultItem"
+        :editedItem="editedItem"
         :fnCommit="fnSave"
     >
-
     </RegistraHora>
 
 </template>
@@ -22,13 +22,14 @@ export default {
     },
     data () {
         return {
-            fnSave : (item) => this.$store.dispatch('ponto/save', item)
+            fnSave : (item) => this.$store.dispatch('ponto/save', item),
+            defaultItem: () => this.$store.dispatch('ponto/reset')
         }
     },
     computed: {
         ...mapState({
             headers: state => state.ponto.headers,
-            defaultItem: state => state.ponto.defaultItem(),
+            editedItem: state => state.ponto.editedItem
         })
     }
 }

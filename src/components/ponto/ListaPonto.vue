@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         delRegistro (item) {
-            db.collection(COLLECTION_PONTO).doc(item.id).delete()
+            db.collection(COLLECTION_PONTO).doc(item.id)
         },
         formatData: (data) => {
             return !data || typeof data !== 'string' ? null : (new Date(data)).toISOString().slice(0,10).split('-').reverse().join('/')

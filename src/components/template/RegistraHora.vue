@@ -28,9 +28,8 @@
 
       </v-layout>
     </v-container>
-    {{editedItem}}
   </v-form>
-
+  
 </template>
 
 <script>
@@ -39,14 +38,14 @@ export default {
     name: "RegistraHora",
     props: {
         headers: { type: Array, required: true },
-        defaultItem: { type: Object, required: true },
+        defaultItem: { type: Function, required: true },
         fnCommit: { type: Function, required: false },
-        fnReset: { type: Function, required: false }
+        fnReset: { type: Function, required: false },
+        editedItem: { type: Object, required: true }
     },
     data () {
         return {
             menu:false,
-            editedItem: null
         }
     },
     created () {
@@ -61,7 +60,7 @@ export default {
             }
         },
         resetForm () {
-            this.editedItem = Object.assign({}, this.defaultItem)
+            this.defaultItem()
         },
         classDef (type) {
             if ( type === 'date') return ['xs12','sm2'];
