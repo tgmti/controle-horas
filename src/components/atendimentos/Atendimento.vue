@@ -1,16 +1,20 @@
 <template>
     <div class="atendimento">
-        <ListaHorasAtendimento></ListaHorasAtendimento>        
+        <ApontaAtendimento></ApontaAtendimento>
+
+        <ListaHorasAtendimento></ListaHorasAtendimento>
     </div>    
 </template>
 
 <script>
 import ListaHorasAtendimento from '@/components/atendimentos/ListaHorasAtendimento'
+import ApontaAtendimento from '@/components/atendimentos/ApontaAtendimento'
 
 export default {
   name: 'Atendimento',
   components: {
-    ListaHorasAtendimento
+    ListaHorasAtendimento,
+    ApontaAtendimento
   }
 }
 </script>

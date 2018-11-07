@@ -5,6 +5,7 @@
         :headers="headers"
         :items="items"
         :fnLoadReg="fnLoadReg"
+        :fnDelete="fnDelete"
      ></ListaHoras>
 
 </template>
@@ -20,9 +21,8 @@ export default {
     },
    data () {
       return {
-        fnLoadReg: function(item) { 
-            return item;
-        }
+        fnLoadReg: (item) => this.$store.dispatch('atendimento/edit', item),
+        fnDelete: (item) => this.$store.dispatch('atendimento/delete', item)
       }
    },
 	computed: {
