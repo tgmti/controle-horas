@@ -64,33 +64,35 @@ npm run deploy
 ```
 
 ### Run your tests
-```
+
+``` language:javascript
 npm run test
 ```
 
 ### Lints and fixes files
-```
+
+``` language:javascript
 npm run lint
 ```
 
-
 ## Todo List
 
- - [X] Vue testes
- - [ ] Componentizar melhor os elementos, para tornar testáveis
- - [ ] Documentar Stack utilizada
- - [ ] Calcular total de horas
- - [ ] Converter para hora decimal
- - [ ] Criar DashBoard com os totais
- - [ ] Criar Rotas e arrumar menu
- - [ ] Criar componente e coleção para registro de OS
- - [ ] App com Vue native
- - [ ] Coleção e componente para previsão da folha
- - [ ] Ajustar campo hora do Registro ponto
- - [ ] Criar coleção para configurações, adicionar a tolerancia de 10 minutos para o ponto
- - [ ] Melhorar visual
- - [ ] Separar as movimentações do backend em outro arquivo
- - [ ] Ponto: Ao alterar data, carregar do banco caso já existir na collection (unique key)
- - [ ] Ponto: Carregar o objeto com a data de hoje, se já existir
- - [ ] Ponto: Descobrir pq com enter recarrega a table e com o botão não
-
+- [ ] Converter para hora decimal
+- [ ] Calcular total de horas
+- [ ] Criar testes dos componenetes para eliminar os modelos
+- [ ] Documentar Stack utilizada
+- [ ] Criar DashBoard com os totais
+- [ ] Arrumar menu
+- [ ] App com Vue native
+- [ ] Coleção e componente para previsão da folha
+- [ ] Criar coleção para configurações, adicionar a tolerancia de 10 minutos para o ponto
+- [ ] Melhorar visual
+- [ ] Ponto: Ao alterar data, carregar do banco caso já existir na collection (unique key)
+- [ ] Ponto: Carregar o objeto com a data de hoje, se já existir
+- [ ] Ponto: Descobrir pq com enter recarrega a table e com o botão não
+- [X] Vue testes
+- [X] Componentizar melhor os elementos, para tornar testáveis
+- [X] Criar Rotas
+- [X] Criar componente e coleção para registro de OS
+- [X] Separar as movimentações do backend em outro arquivo
+- [X] Ajustar campo hora do Registro ponto
