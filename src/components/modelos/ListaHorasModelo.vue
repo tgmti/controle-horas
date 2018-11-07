@@ -5,6 +5,7 @@
         :headers="headers"
         :items="items"
         :fnLoadReg="fnLoadReg"
+        :fnDelete="fnDelete"
      ></ListaHoras>
 
 </template>
@@ -23,9 +24,8 @@ export default {
 
    data () {
       return {
-        fnLoadReg: function(item) { 
-            return item;
-        }
+        fnLoadReg: (item) => this.$store.dispatch('ponto/edit', item),
+        fnDelete: (item) => this.$store.dispatch('ponto/delete', item)
       }
    },
 	computed: {

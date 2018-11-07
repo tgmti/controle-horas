@@ -22,28 +22,28 @@ const state = {
 		ent2: null,
 		sai2: null,
 		obs: null
-	})
-}
-
-const formatReg = function (id, reg) {
-	let ret = {
-		data : reg.data,
-		ent1 : reg.ent1,
-		sai1 : reg.sai1,
-		ent2 : reg.ent2,
-		sai2 : reg.sai2,
-		obs : reg.obs
+	}),
+	formatReg : (id, reg) => {
+		let ret = {
+			data : reg.data,
+			ent1 : reg.ent1,
+			sai1 : reg.sai1,
+			ent2 : reg.ent2,
+			sai2 : reg.sai2,
+			obs : reg.obs
+		}
+		if (id) ret.id = id;
+	
+		return ret;
 	}
-	if (id) ret.id = id;
-
-	return ret;
 }
+
 
 
 const mutations = {
 
 	ADD_REGISTRO (state, doc) {
-		state.registros.push(formatReg( doc.id, doc.data() ))
+		state.registros.push(state.formatReg( doc.id, doc.data() ))
 	},
 
 	RESET_REGISTRO (state) {
@@ -107,10 +107,25 @@ const actions = {
 	},
 
 	save (context, editedItem ) {
-		const reg = formatReg(null, editedItem);
+		const reg = state.formatReg(null, editedItem);
 		const id = editedItem.id
 		const promisse = id ? COLLECTION_REF.doc(id).update(reg) : COLLECTION_REF.add(reg)
 		return promisse;
+	},
+
+	async edit (context, item ) {
+		const id = item.id
+		if (id) {
+            COLLECTION_REF.doc(id).get().then( (resp) => {
+                return state.formatReg( id, resp.data() )
+            })			
+		}
+	},
+
+	async delete (context, item ) {
+		if (item.id) {
+            COLLECTION_REF.doc(item.id).delete()	
+		}
 	}
 }
 
