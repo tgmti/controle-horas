@@ -1,7 +1,7 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vuetify from 'vuetify'
 
-import ListaHoras from '@/components/ListaHoras/ListaHoras'
+import ListaHoras from '@/components/template/ListaHoras'
 
 const localVue = createLocalVue()
 
