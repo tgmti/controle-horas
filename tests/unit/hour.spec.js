@@ -1,12 +1,19 @@
 import Hour from '@/util/hour'
 
 describe('Class Hour Test', () => {
-    const hourObject = new Hour()
-    test('convert string To Decimal Hour', () => {
-        expect(hourObject.stringToDecimal("08:30").hourDecimal).toEqual(8.5);
+    test('convert string To Float Hour', () => {
+        expect(Hour.stringToFloat("08:30")).toEqual(8.5);
     })
 
-    test('convert Decimal Hour to String', () => {
-        expect(hourObject.decimalToString(8.5).hourString).toEqual("08:30");
+    test('convert Float Hour to String', () => {
+        expect(Hour.floatToString(8.5)).toEqual("08:30");
+    })
+
+    test('Return diff hour', () => {
+        expect(Hour.diffHour("08:30", "10:45")).toEqual("02:15");
+    })
+
+    test('Return diff hour in float', () => {
+        expect(Hour.diffHourToFloat("08:30", "10:45")).toEqual(2.25);
     })
   })
