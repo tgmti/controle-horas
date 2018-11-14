@@ -21,7 +21,7 @@ export const routes = [
     },
     {
         path: '/controle-horas/atendimentos',
-        name: 'Atendimentos',
+        name: 'Atend.',
         component: Atendimento,
         icon: 'work',
     },

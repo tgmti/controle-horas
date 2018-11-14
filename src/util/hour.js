@@ -16,7 +16,7 @@ class Hour {
     * @param {String} hourString - Hour
     */
    static stringToFloat(hourString) {
-       if (! validHour(hourString) ) return 0;
+       if (! vHour(hourString) ) return 0;
        const fullHours = parseInt(hourString.substr(0,2));
        const minutes = parseInt(hourString.substr(3)) / 60;
        return parseFloat(parseFloat(fullHours + minutes).toFixed(2));
@@ -35,15 +35,15 @@ class Hour {
     
     static diffHour(hourIni, hourEnd, skipValidation) {
         if (! skipValidation) {
-            if (! validHour(hourIni) ) return null;
-            if (! validHour(hourEnd) ) return null;
+            if (! vHour(hourIni) ) return null;
+            if (! vHour(hourEnd) ) return null;
         }
-        return d2S( floatDiff(hourIni, hourEnd, true) );
+        return d2S( dDiff(hourIni, hourEnd, true) );
     }
     static diffHourToFloat(hourIni, hourEnd, skipValidation) {
         if (! skipValidation) {
-            if (! validHour(hourIni) ) return null;
-            if (! validHour(hourEnd) ) return null;
+            if (! vHour(hourIni) ) return null;
+            if (! vHour(hourEnd) ) return null;
         }
         return s2F(hourEnd) - s2F(hourIni);
     }
@@ -77,9 +77,9 @@ class Hour {
 
 export const d2S = Hour.floatToString;
 export const s2F = Hour.stringToFloat;
-export const floatDiff = Hour.diffHourToFloat;
-export const stringDiff = Hour.diffHour;
+export const dDiff = Hour.diffHourToFloat;
+export const sDiff = Hour.diffHour;
 export const lPad = Hour.lPad;
-export const validHour = Hour.isValid
+export const vHour = Hour.isValid
 
 export default Hour;

@@ -1,7 +1,19 @@
 import {db} from '@/store/firedb'
 import template from '@/store/template'
+import {sDiff,dDiff} from '@/util/hour'
 
 const COLLECTION_NAME = 'atendimento';
+
+const getters = {
+	tth : (state) => {
+		const e = state.editedItem
+		return sDiff(e.ini, e.fim);
+	},
+	ttd : (state) => {
+		const e = state.editedItem
+		return dDiff(e.ini, e.fim);
+	}
+}
 
 const state = {
 	registros : [],
@@ -14,10 +26,11 @@ const state = {
 		{ text: 'Cliente'   , value: 'cli' },
 		{ text: 'Chamado/OS', value: 'cha' },
 		{ text: 'Observação', value: 'obs' },
-		{ text: 'Tt.Hora'   , value: 'tth', type: 'time' },
-		{ text: 'Tt.Decimal', value: 'ttd', type: 'time' }
+		{ text: 'Tt.Hora'   , value: 'atendimento/tth', type: 'time' },
+		{ text: 'Tt.Decimal', value: 'atendimento/ttd', type: 'text' }
 	],
 	editedItem : {},
+	computedItem : { tth: getters.tth },
 	defaultItem : () => ({
 		id: null,
 		dat: ( (new Date()).toLocaleDateString().split('/').reverse().join('-') ),
@@ -27,9 +40,7 @@ const state = {
 		tra: null,
 		cli: null,
 		cha: null,
-		obs: null,
-		tth: null,
-		ttd: null		
+		obs: null		
 	}),
 	formatReg : (id, reg) => {
 		let ret = {
@@ -50,4 +61,4 @@ const state = {
 }
 
 const moduleTemplate = template
-export default moduleTemplate(db.collection(COLLECTION_NAME), state)
+export default moduleTemplate(db.collection(COLLECTION_NAME), state, getters)

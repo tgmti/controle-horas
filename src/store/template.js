@@ -1,7 +1,8 @@
 
-export default function moduleTemplate (COLLECTION_REF, state) { return {    
+export default function moduleTemplate (COLLECTION_REF, state, getters) { return {    
     namespaced: true,
     state,
+    getters,
     mutations : {
         ADD_REGISTRO (state, doc) {
             state.registros.push(state.formatReg( doc.id, doc.data() ))

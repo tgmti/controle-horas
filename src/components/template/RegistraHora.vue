@@ -8,13 +8,25 @@
             v-for="(header, i) in headers"  :key="i"
             :class="classDef(header.type)"
         >
-            <v-text-field
-                :label="header.text"
-                :type="(header.type || 'text')"
-                v-model="editedItem[header.value]"
-                @keypress.enter="commitReg"
-            ></v-text-field>
 
+            <template v-if="computedItem.hasOwnProperty(header.value)" >
+                <v-text-field
+                    :label="header.text"
+                    :type="(header.type || 'text')"
+                    :value="computedItem[header.value]"
+                    :disabled="true"
+                ></v-text-field>
+            </template>
+            
+            <template v-if="editedItem.hasOwnProperty(header.value)">
+                <v-text-field
+                    :label="header.text"
+                    :type="(header.type || 'text')"
+                    v-model="editedItem[header.value]"
+                    @keypress.enter="commitReg"
+                ></v-text-field>
+            </template>
+            
         </v-flex>
 
         <v-flex xs12 sm3>
@@ -41,7 +53,8 @@ export default {
         defaultItem: { type: Function, required: true },
         fnCommit: { type: Function, required: false },
         fnReset: { type: Function, required: false },
-        editedItem: { type: Object, required: true }
+        editedItem: { type: Object, required: true },
+        computedItem: { type: Object, required: true }
     },
     data () {
         return {

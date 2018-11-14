@@ -4,6 +4,7 @@
         :headers="headers"
         :defaultItem="defaultItem"
         :editedItem="editedItem"
+        :computedItem="computedItem"
         :fnCommit="fnSave"
     >
     </RegistraHora>
@@ -23,7 +24,8 @@ export default {
     data () {
         return {
             fnSave : (item) => this.$store.dispatch('atendimento/save', item),
-            defaultItem: () => this.$store.dispatch('atendimento/reset')
+            defaultItem: () => this.$store.dispatch('atendimento/reset'),
+            computedItem: this.$store.getters
         }
     },
     computed: {
