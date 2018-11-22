@@ -52,8 +52,8 @@ const state = {
 			cli : reg.cli,
 			cha : reg.cha,
 			obs : reg.obs,
-			tth : reg.tth,
-			ttd : reg.ttd
+			tth : sDiff(reg.ini, reg.fim),
+			ttd : dDiff(reg.ini, reg.fim)
 		}
 		if (id) ret.id = id;
 		return ret;
