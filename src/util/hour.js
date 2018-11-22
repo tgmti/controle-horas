@@ -16,7 +16,7 @@ class Hour {
     * @param {String} hourString - Hour
     */
    static stringToFloat(hourString) {
-       if (! vHour(hourString) ) return 0;
+       if (! Hour.isValid(hourString) ) return 0;
        const fullHours = parseInt(hourString.substr(0,2));
        const minutes = parseInt(hourString.substr(3)) / 60;
        return parseFloat(parseFloat(fullHours + minutes).toFixed(2));
@@ -29,23 +29,23 @@ class Hour {
      */
     static floatToString(hourFloat) {
         const fullHours = parseInt(hourFloat);
-        const minutes = (hourFloat - fullHours) * 60;
+        const minutes = parseInt( parseFloat( (hourFloat - fullHours) * 60 ).toFixed(0) );
         return Hour.lPad(fullHours) + ":" + Hour.lPad(minutes);
     }
     
     static diffHour(hourIni, hourEnd, skipValidation) {
         if (! skipValidation) {
-            if (! vHour(hourIni) ) return null;
-            if (! vHour(hourEnd) ) return null;
+            if (! Hour.isValid(hourIni) ) return null;
+            if (! Hour.isValid(hourEnd) ) return null;
         }
-        return d2S( dDiff(hourIni, hourEnd, true) );
+        return Hour.floatToString( Hour.diffHourToFloat(hourIni, hourEnd, true) );
     }
     static diffHourToFloat(hourIni, hourEnd, skipValidation) {
         if (! skipValidation) {
-            if (! vHour(hourIni) ) return null;
-            if (! vHour(hourEnd) ) return null;
+            if (! Hour.isValid(hourIni) ) return null;
+            if (! Hour.isValid(hourEnd) ) return null;
         }
-        return s2F(hourEnd) - s2F(hourIni);
+        return parseFloat( parseFloat( Hour.stringToFloat(hourEnd) - Hour.stringToFloat(hourIni) ).toFixed(2) );
     }
 
     static isValid(hour) {
