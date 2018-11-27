@@ -77,7 +77,6 @@ npm run lint
 
 ## Todo List
 
-- [ ] Converter para hora decimal
 - [ ] Calcular total de horas
 - [ ] Criar testes dos componenetes para eliminar os modelos
 - [ ] Documentar Stack utilizada
@@ -96,3 +95,4 @@ npm run lint
 - [X] Criar componente e coleção para registro de OS
 - [X] Separar as movimentações do backend em outro arquivo
 - [X] Ajustar campo hora do Registro ponto
+- [X] Converter para hora decimal
