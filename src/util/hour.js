@@ -75,11 +75,4 @@ class Hour {
     
 }
 
-export const d2S = Hour.floatToString;
-export const s2F = Hour.stringToFloat;
-export const dDiff = Hour.diffHourToFloat;
-export const sDiff = Hour.diffHour;
-export const lPad = Hour.lPad;
-export const vHour = Hour.isValid
-
 export default Hour;

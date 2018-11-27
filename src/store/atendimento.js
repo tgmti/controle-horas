@@ -1,17 +1,17 @@
 import {db} from '@/store/firedb'
 import template from '@/store/template'
-import {sDiff,dDiff} from '@/util/hour'
+import Hour from '@/util/hour'
 
 const COLLECTION_NAME = 'atendimento';
 
 const getters = {
 	tth : (state) => {
 		const e = state.editedItem
-		return sDiff(e.ini, e.fim);
+		return Hour.diffHour(e.ini, e.fim);
 	},
 	ttd : (state) => {
 		const e = state.editedItem
-		return dDiff(e.ini, e.fim);
+		return Hour.diffHourToFloat(e.ini, e.fim);
 	}
 }
 
@@ -52,8 +52,8 @@ const state = {
 			cli : reg.cli,
 			cha : reg.cha,
 			obs : reg.obs,
-			tth : sDiff(reg.ini, reg.fim),
-			ttd : dDiff(reg.ini, reg.fim)
+			tth : Hour.diffHour(reg.ini, reg.fim),
+			ttd : Hour.diffHourToFloat(reg.ini, reg.fim)
 		}
 		if (id) ret.id = id;
 		return ret;

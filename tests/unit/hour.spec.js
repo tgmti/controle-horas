@@ -16,7 +16,7 @@ describe('Class Hour Test', () => {
     test('Return diff hour in float', () => {
         expect(Hour.diffHourToFloat("08:30", "10:45")).toEqual(2.25);
     })
-
+    
     test('Valid hour', () => {
         expect(Hour.isValid("08:30")).toBeTruthy()
         expect(Hour.isValid("test:xpto")).toBeFalsy()
@@ -25,4 +25,10 @@ describe('Class Hour Test', () => {
         expect(Hour.isValid("24:01")).toBeFalsy()
         expect(Hour.isValid("test")).toBeFalsy()
     })
+    
+    test('Return diff hour arround problems', () => {
+        expect(Hour.diffHour("08:12", "12:00")).toEqual("03:48");
+    })
+    
+
   })
