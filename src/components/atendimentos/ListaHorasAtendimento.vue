@@ -1,5 +1,11 @@
 <template>
     
+    <div>
+
+    <h1>
+        Total de horas: {{totHours}}
+    </h1>
+
      <ListaHoras
         title="Lista Horas Atendimento"
         :headers="headers"
@@ -7,12 +13,14 @@
         :fnLoadReg="fnLoadReg"
         :fnDelete="fnDelete"
      ></ListaHoras>
+    
+    </div>
 
 </template>
 
 <script>
 import ListaHoras from '@/components/template/ListaHoras'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
     name: 'ListaHorasAtendimento',    
@@ -26,10 +34,14 @@ export default {
       }
    },
 	computed: {
-		...mapState({
-            items: state => state.atendimento.registros,
+        ...mapState({
             headers: state => state.atendimento.listHeaders
-        })
+        }),
+        ...mapGetters(
+            {items: 'atendimento/filteredReg',
+            totHours: 'atendimento/totHours'}    
+        )
+        
     },
     created () {
         this.$store.dispatch('atendimento/get');

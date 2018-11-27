@@ -43,4 +43,8 @@ describe('Class Hour Test', () => {
         expect(Hour.floatSumToString(180.25)).toEqual("180:15");
     })
 
+    test('convert Float to String Sum of Hour - round problem', () => {
+        expect(Hour.floatSumToString(21.999999999999996)).toEqual("22:00");
+    })
+
   })

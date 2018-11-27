@@ -12,7 +12,18 @@ const getters = {
 	ttd : (state) => {
 		const e = state.editedItem
 		return Hour.diffHourToFloat(e.ini, e.fim);
-	}
+	},
+	filteredReg : (state) => state.registros.filter(
+		(e) => (!state.datIni || e.dat >=state.datIni ) && 
+				(!state.datFim || e.dat <= state.datFim) 
+	)
+	,
+	totHours : (state, getters) => 
+		Hour.floatToString(
+			getters.filteredReg.reduce( 
+				(sum, reg) => sum + reg.ttd
+			, 0)
+		, true)
 }
 
 const state = {
@@ -41,6 +52,8 @@ const state = {
 		{ text: 'Tt.Hora'   , value: 'tth', type: 'time' },
 		{ text: 'Tt.Decimal', value: 'ttd', type: 'text' }
 	],
+	datIni: null,
+	datFim: null,
 	editedItem : {},
 	computedItem : { tth: getters.tth },
 	defaultItem : () => ({

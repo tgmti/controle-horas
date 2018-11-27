@@ -17,8 +17,8 @@ class Hour {
     */
    static stringToFloat(hourString, sumhours) {
        if (! Hour.isValid(hourString, sumhours) ) return 0;
-       const fullHours = parseInt(hourString.slice(0,-3));
-       const minutes = parseInt(hourString.slice(-2)) / 60;
+       const fullHours = Hour.fullHoursFromString(hourString);
+       const minutes = Hour.minutesFromString(hourString) / 60;
        return parseFloat(parseFloat(fullHours + minutes).toFixed(2));
     }
     
@@ -32,8 +32,12 @@ class Hour {
      * @param {float} hourFloat - Hour Float
      */
     static floatToString(hourFloat, sumhours) {
-        const fullHours = parseInt(hourFloat);
-        const minutes = parseInt( parseFloat( (hourFloat - fullHours) * 60 ).toFixed(0) );
+        let fullHours = parseInt(hourFloat);
+        let minutes = parseInt( parseFloat( (hourFloat - fullHours) * 60 ).toFixed(0) );
+        
+        fullHours += minutes >= 60 ? 1 : 0;
+        minutes -= minutes >= 60 ? 60 : 0;
+
         const length = sumhours ? fullHours.toString().length : 2;
         return Hour.lPad(fullHours, length) + ":" + Hour.lPad(minutes);
     }
@@ -67,8 +71,8 @@ class Hour {
          ) )
             return false;
         
-        const fullHours = parseInt(hour.slice(0,-3))
-        const minutes = parseInt(hour.slice(-2))
+        const fullHours = Hour.fullHoursFromString(hour);
+        const minutes = Hour.minutesFromString(hour);
 
         if  (! (
                 fullHours >= 0 && 
@@ -83,6 +87,14 @@ class Hour {
     static lPad(value, width, padding) {
         const length = width || 2
         return ( Array(length).join(padding || "0") + (value || 0) ).slice(-length)
+    }
+
+    static fullHoursFromString(hour) {
+        return parseInt(hour.slice(0,-3));
+    }
+
+    static minutesFromString(hour) {
+        return parseInt(hour.slice(-2));
     }
     
 }

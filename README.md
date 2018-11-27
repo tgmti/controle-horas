@@ -77,10 +77,10 @@ npm run lint
 
 ## Todo List
 
-- [ ] Calcular total de horas
+- [ ] Criar DashBoard com os totais
+- [ ] Criar campos para filtro da lista por data
 - [ ] Criar testes dos componenetes para eliminar os modelos
 - [ ] Documentar Stack utilizada
-- [ ] Criar DashBoard com os totais
 - [ ] Arrumar menu
 - [ ] App com Vue native
 - [ ] Coleção e componente para previsão da folha
@@ -96,3 +96,4 @@ npm run lint
 - [X] Separar as movimentações do backend em outro arquivo
 - [X] Ajustar campo hora do Registro ponto
 - [X] Converter para hora decimal
+- [X] Calcular e mostrar total de horas
