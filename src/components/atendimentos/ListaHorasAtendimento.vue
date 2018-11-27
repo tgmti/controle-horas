@@ -28,7 +28,7 @@ export default {
 	computed: {
 		...mapState({
             items: state => state.atendimento.registros,
-            headers: state => state.atendimento.headers
+            headers: state => state.atendimento.listHeaders
         })
     },
     created () {

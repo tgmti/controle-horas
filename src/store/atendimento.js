@@ -29,6 +29,18 @@ const state = {
 		{ text: 'Tt.Hora'   , value: 'atendimento/tth', type: 'time' },
 		{ text: 'Tt.Decimal', value: 'atendimento/ttd', type: 'text' }
 	],
+	listHeaders : [
+		{ text: 'Data'      , value: 'dat', align: 'left', type: 'date' },
+		{ text: 'Início'    , value: 'ini', type: 'time' },
+		{ text: 'Fim'       , value: 'fim', type: 'time' },
+		{ text: 'Desconto'  , value: 'des', type: 'time' },
+		{ text: 'Translado' , value: 'tra', type: 'time' },
+		{ text: 'Cliente'   , value: 'cli' },
+		{ text: 'Chamado/OS', value: 'cha' },
+		{ text: 'Observação', value: 'obs' },
+		{ text: 'Tt.Hora'   , value: 'tth', type: 'time' },
+		{ text: 'Tt.Decimal', value: 'ttd', type: 'text' }
+	],
 	editedItem : {},
 	computedItem : { tth: getters.tth },
 	defaultItem : () => ({
