@@ -52,8 +52,8 @@ const state = {
 		{ text: 'Tt.Hora'   , value: 'tth', type: 'time' },
 		{ text: 'Tt.Decimal', value: 'ttd', type: 'text' }
 	],
-	datIni: null,
-	datFim: null,
+	datIni: '2018-01-01',
+	datFim: '2018-12-31',
 	editedItem : {},
 	computedItem : { tth: getters.tth },
 	defaultItem : () => ({
