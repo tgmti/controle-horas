@@ -4,13 +4,29 @@
         <v-card-title>
             <span>{{title}}</span>
             <v-spacer></v-spacer>
+
+            <v-text-field
+                label="De: "
+                type='date'
+                v-model="datIni"
+            ></v-text-field>
+
+            <v-spacer></v-spacer>
+
+            <v-text-field
+                label="Até: "
+                type='date'
+                v-model="datFim"
+            ></v-text-field>
+        
+            <v-spacer></v-spacer>
+            
             <v-text-field
                 v-model="search"
                 append-icon="search"
-                label="Search"
-                single-line
-                hide-details
+                label="Filtro"
             ></v-text-field>
+
         </v-card-title>
 
         <v-data-table
@@ -59,7 +75,7 @@ export default {
     name: "ListaHoras",
     data () {
         return {
-            search: null,
+            search: null
         }
     },
     props: {
@@ -67,7 +83,9 @@ export default {
         headers: { type: Array, required: true },
         items: { type: Array, required: false },
         fnLoadReg: { type: Function, required: false },
-        fnDelete: { type: Function, required: false }
+        fnDelete: { type: Function, required: false },
+        datIni: { type: String },
+        datFim: { type: String }
     },
     methods: { 
         loadReg: function(item){ this.fnLoadReg ? this.fnLoadReg(item) : true}, 
