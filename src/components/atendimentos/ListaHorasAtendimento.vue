@@ -6,12 +6,22 @@
         Total de horas: {{totHours}}
     </h1>
 
+
+    <v-text-field
+        label="De: "
+        type='date'
+        :value.sync="datIni"
+    ></v-text-field>
+
+
      <ListaHoras
         title="Lista Horas Atendimento"
         :headers="headers"
         :items="items"
         :fnLoadReg="fnLoadReg"
         :fnDelete="fnDelete"
+        :datIni="datIni"
+        :datFim="datFim"
      ></ListaHoras>
     
     </div>
@@ -30,12 +40,14 @@ export default {
    data () {
       return {
         fnLoadReg: (item) => this.$store.dispatch('atendimento/edit', item),
-        fnDelete: (item) => this.$store.dispatch('atendimento/delete', item)
+        fnDelete: (item) => this.$store.dispatch('atendimento/delete', item),
       }
    },
 	computed: {
-        ...mapState({
-            headers: state => state.atendimento.listHeaders
+        ...mapState('atendimento', {
+            headers: 'listHeaders',
+            datIni: 'datIni',
+            datFim: 'datFim'
         }),
         ...mapGetters(
             {items: 'atendimento/filteredReg',
