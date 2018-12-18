@@ -8,7 +8,7 @@
             <v-text-field
                 label="De: "
                 type='date'
-                v-model="datIni"
+                v-model="datFrom"
             ></v-text-field>
 
             <v-spacer></v-spacer>
@@ -16,7 +16,7 @@
             <v-text-field
                 label="Até: "
                 type='date'
-                v-model="datFim"
+                v-model="datTo"
             ></v-text-field>
         
             <v-spacer></v-spacer>
@@ -75,7 +75,9 @@ export default {
     name: "ListaHoras",
     data () {
         return {
-            search: null
+            search: null,
+            datFrom: this.datIni,
+            datTo: this.datFim
         }
     },
     props: {
@@ -93,6 +95,11 @@ export default {
         formatData: (data) => (
             !data || typeof data !== 'string' ? null : (new Date(data)).toISOString().slice(0,10).split('-').reverse().join('/')
         )
+    }
+    ,
+    watch: {
+        datFrom(value) { this.$emit('syncValue', {field: 'datIni', value}) },
+        datTo(value) { this.$emit('syncValue', {field: 'datFim', value}) }
     }
 }
 

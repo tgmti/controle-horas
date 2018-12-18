@@ -54,7 +54,7 @@ export default {
         fnCommit: { type: Function, required: false },
         fnReset: { type: Function, required: false },
         editedItem: { type: Object, required: true },
-        computedItem: { type: Object, required: true }
+        computedItem: { type: Object, required: false }
     },
     data () {
         return {
