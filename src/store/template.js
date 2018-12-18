@@ -15,6 +15,9 @@ export default function moduleTemplate (COLLECTION_REF, state, getters) { return
         },
         RESET_EDIT (state) {
             state.editedItem = Object.assign({}, state.defaultItem());
+        },
+        UPDATE_EDITED (payload) {
+            state.editedItem = Object.assign(state.editedItem, payload);
         }
     },
     actions : {
