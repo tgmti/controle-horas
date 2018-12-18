@@ -25,14 +25,22 @@ export default {
         return {
             fnSave : (item) => this.$store.dispatch('atendimento/save', item),
             defaultItem: () => this.$store.dispatch('atendimento/reset'),
-            computedItem: this.$store.getters
+            computedItem: this.$store.getters,
+            editedItem: this.$store.state.atendimento.editedItem
         }
     },
     computed: {
         ...mapState({
             headers: state => state.atendimento.headers,
-            editedItem: state => state.atendimento.editedItem
         })
+    },
+    watch: {
+        editedItem: {
+            handler: (editedItem) => this.$store.commit("UPDATE_EDITED",editedItem)
+        }
+    },
+    created(){
+        this.editedItem = Object.assign(this.editedItem, this.$store.state.atendimento.editedItem)
     }
 }
 </script>
