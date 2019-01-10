@@ -1,6 +1,7 @@
 <template>
 
     <RegistraHora 
+        title="Modelo"
         :headers="headers"
         :defaultItem="defaultItem"
         :editedItem="editedItem"

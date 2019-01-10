@@ -2,7 +2,7 @@
 
     <v-card>
         <v-card-title>
-            <span>{{title}}</span>
+            <strong>Filtros: </strong>
             <v-spacer></v-spacer>
 
             <v-text-field
@@ -81,7 +81,6 @@ export default {
         }
     },
     props: {
-        title : { type : String , required: true },
         headers: { type: Array, required: true },
         items: { type: Array, required: false },
         fnLoadReg: { type: Function, required: false },
